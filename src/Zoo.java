@@ -1,11 +1,12 @@
 import java.nio.channels.SelectableChannel;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 public class Zoo {
 
   private int balance;
-  private ArrayList<Animal> inventory = new ArrayList<Animal>();
+  private TreeMap<Integer, Animal> inventory;
   private ArrayList<Settlement> settlementList = new ArrayList<Settlement>();
   private boolean running = true;
   private String choice;
@@ -13,7 +14,8 @@ public class Zoo {
   Menu menu = new Menu();
 
   public Zoo() {
-    this.balance = 2000;
+    balance = 2000;
+    inventory = new TreeMap<Integer, Animal>();
   }
 
   // METHODS
@@ -37,7 +39,6 @@ public class Zoo {
         "---------------------------------\n\n" +
         "Enter an option: "
       );
-
       choice = in.nextLine();
       switch (choice) {
         case "0":
@@ -46,9 +47,10 @@ public class Zoo {
         case "1":
           Console.clear();
           acquireAnimalMenu();
+          break;
         //Console.clear();
         case "2":
-          //buildSettlement();
+          buildSettlement();
           System.out.println("get rekt");
           break;
         case "3":
@@ -91,8 +93,9 @@ public class Zoo {
       "---------------------------------\n\n" +
       "Enter an option: "
     );
-
+    
     choice = in.nextLine();
+    System.out.println(choice);
     switch (choice) {
       case "0":
         Console.clear();
@@ -100,6 +103,7 @@ public class Zoo {
       case "1":
         Console.clear();
         getRandomAnimal();
+        System.out.println(choice);
         break;
       case "2":
         System.out.println("GENETIC FEATURE");
@@ -126,8 +130,51 @@ public class Zoo {
       animal1.appeal +
       " |\n" +
       "----------------------------------\n\n" +
+      "|                            |\n" +
+      "| (2) Name: " +
+      animal2.name +
+      " | Age: " +
+      animal2.age +
+      " | Appeal: " +
+      animal2.appeal +
+      " |\n" +
+      "----------------------------------\n\n" +
+      "|                            |\n" +
+      "| (3) Name: " +
+      animal3.name +
+      " | Age: " +
+      animal3.age +
+      " | Appeal: " +
+      animal3.appeal +
+      " |\n" +
+      "----------------------------------\n\n" +
       "Enter an option: "
     );
+    choice = in.nextLine();
+    System.out.println(choice);
+    switch (choice) {
+      case "0":
+        Console.clear();
+        return;
+      case "1":
+        Console.clear();
+        Animal ani1 = new aniTiger(animal1.name, animal1.age);
+        addAnimal(ani1);
+        System.out.println(choice);
+        break;
+      case "2":
+        Animal ani2 = new aniTiger(animal2.name, animal2.age);
+        addAnimal(ani2);
+        System.out.println("GENETIC FEATURE");
+        break;
+      case "3":
+        Animal ani3 = new aniTiger(animal3.name, animal3.age);
+        addAnimal(ani3);
+        System.out.println("GENETIC CHAR");
+        break;
+      default:
+        System.out.println("Please enter a valid option.");
+    }
   }
 
   private void buildSettlement() {
@@ -169,7 +216,7 @@ public class Zoo {
       case "1":
         Console.clear();
         buy(proposal1.price);
-        settlementList.add(proposal1);
+        settlementList.add(proposal1); //Bugged
         break;
       case "2":
         Console.clear();
@@ -213,7 +260,9 @@ public class Zoo {
         Console.clear();
         return;
       case "1":
-        System.out.println("ALL");
+        System.out.println("ALL ANIMALS");
+        System.out.println(showAllAnimals());
+        
         break;
       case "2":
         System.out.println("GENETIC FEATURE");
@@ -226,13 +275,23 @@ public class Zoo {
     }
   }
 
+  public TreeMap<Integer, Animal> showAllAnimals(){
+    return inventory;
+
+  } 
+
+  public void addAnimal(Animal a){
+    inventory.put(a.getId(), a);
+  }
+
+  
   private void displayInformationMenu() {}
 
   private void accountingPeriod() {
     // Each accounting period is equal to 4 months in time
 
     // Update stored animals
-    inventory.forEach(animal -> animal.setAge(4));
+    //inventory.forEach(animal -> animal.setAge(4));
     // Update active animals
   }
 
