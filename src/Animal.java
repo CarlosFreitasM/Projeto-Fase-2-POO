@@ -86,7 +86,7 @@ public class Animal {
     String text;
     text ="Código do animal: "+id+", ";
     text+="Nome: "+name+", ";
-    text+="Idade: "+age+"::";
+    text+="Idade: "+age+", ";
     return text;
   }
 }

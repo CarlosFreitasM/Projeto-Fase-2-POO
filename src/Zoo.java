@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
 
+import javax.swing.WindowConstants;
+
 public class Zoo {
 
   private int balance;
@@ -153,7 +155,7 @@ public class Zoo {
       "| (3) Name: " +
       animal3.name +
       "| Espicies Name: " +
-      animal2.getClass().getSimpleName() +
+      animal3.getClass().getSimpleName() +
       " | Age: " +
       animal3.age +
       " | Appeal: " +
@@ -170,17 +172,17 @@ public class Zoo {
         return;
       case "1":
         Console.clear();
-        Animal ani1 = new Lion(animal1.name, animal1.age, 10);
+        Animal ani1 = createNewAnimal(animal1.getClass().getSimpleName(), animal1.name, animal1.age);
         addAnimal(ani1);
         System.out.println(choice);
         break;
       case "2":
-        Animal ani2 = new aniTiger(animal2.name, animal2.age);
+        Animal ani2 = createNewAnimal(animal2.getClass().getSimpleName(), animal2.name, animal2.age);
         addAnimal(ani2);
         System.out.println("GENETIC FEATURE");
         break;
       case "3":
-        Animal ani3 = new aniTiger(animal3.name, animal3.age);
+        Animal ani3 = createNewAnimal(animal3.getClass().getSimpleName(), animal3.name, animal3.age);
         addAnimal(ani3);
         System.out.println("GENETIC CHAR");
         break;
@@ -311,7 +313,6 @@ public class Zoo {
 
   private Animal instanceRandomAnimal(){
     int i = new Random().nextInt(10);
-    
     switch(i){
       case 0:
         chooseAni = new Lion();
@@ -323,63 +324,62 @@ public class Zoo {
         chooseAni = new Leopard();
         break;
       case 3:
-        chooseAni = new Lion();
+        chooseAni = new Cheetah();
         break;
       case 4:
-        chooseAni = new Leopard();
+        chooseAni = new Cougar();
         break;
       case 5:
-        chooseAni = new Tiger();
+        chooseAni = new Wolf();
         break;
       case 6:
-        chooseAni = new Lion();
+        chooseAni = new Coyote();
         break;
       case 7:
-        chooseAni = new Leopard();
+        chooseAni = new Fox();
         break;
       case 8:
-        chooseAni = new Tiger();
+        chooseAni = new Firesalamandre();
         break;
       case 9:
-        chooseAni = new Lion();
+        chooseAni = new Oxolotl();
         break;
     }
     return chooseAni;
   }
 
-  private Animal createNewAnimal(){
-    int i = new Random().nextInt(10);
+  private Animal createNewAnimal(String animalType, String artName, int age){
     
-    switch(i){
-      case 0:
-        chooseAni = new Lion();
+    switch(animalType){
+      case "Lion":
+        chooseAni = new Lion(artName, age);
         break;
-      case 1:
-        chooseAni = new Tiger();
+      case "Tiger":
+        chooseAni = new Tiger(artName, age);
         break;
-      case 2:
-        chooseAni = new Leopard();
+      case "Leopard":
+        chooseAni = new Leopard(artName, age);
         break;
-      case 3:
-        chooseAni = new Lion();
+      case "Cheetah":
+        chooseAni = new Cheetah(artName, age);
         break;
-      case 4:
-        chooseAni = new Leopard();
+      case "Cougar":
+        chooseAni = new Cougar(artName, age);
         break;
-      case 5:
-        chooseAni = new Tiger();
+      case "Wolf":
+        chooseAni = new Wolf(artName, age);
         break;
-      case 6:
-        chooseAni = new Lion();
+      case "Coyote":
+        chooseAni = new Coyote(artName, age);
         break;
-      case 7:
-        chooseAni = new Leopard();
+      case "Fox":
+        chooseAni = new Fox(artName, age);
         break;
-      case 8:
-        chooseAni = new Tiger();
+      case "Firesalamandre":
+        chooseAni = new Firesalamandre(artName, age);
         break;
-      case 9:
-        chooseAni = new Lion();
+      case "Oxolotl":
+        chooseAni = new Oxolotl(artName, age);
         break;
     }
     return chooseAni;

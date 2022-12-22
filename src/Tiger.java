@@ -1,17 +1,22 @@
 public class Tiger extends Felidae implements Pantherae{
-    public double percBeingFemale;
+    public String espName;
 
     public Tiger(){
-        this.espName="Tiger";
+        
     }
 
-    public Tiger(String name, Integer age, double percBeingFemale){
+    public Tiger(String name, Integer age){
         super(name, age);
         this.espName="Tiger";
-        this.percBeingFemale= percBeingFemale;
     }
 
     public void growl(){
         System.out.println("Tigre rugiu!");
+    }
+
+    public String toString(){
+        String text = super.toString();
+        text+="Da espécie: "+espName+", " + getFamily() + "::";
+        return text;
     }
 }
