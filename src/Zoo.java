@@ -1,5 +1,8 @@
 import java.nio.channels.SelectableChannel;
+import java.util.Random;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
 
@@ -8,14 +11,19 @@ public class Zoo {
   private int balance;
   private TreeMap<Integer, Animal> inventory;
   private ArrayList<Settlement> settlementList = new ArrayList<Settlement>();
+  private ArrayList<Animal> typeanimals = new ArrayList<>();
+  
   private boolean running = true;
   private String choice;
+  private Animal chooseAni;
   Scanner in = new Scanner(System.in);
   Menu menu = new Menu();
 
   public Zoo() {
+
     balance = 2000;
     inventory = new TreeMap<Integer, Animal>();
+    
   }
 
   // METHODS
@@ -95,7 +103,6 @@ public class Zoo {
     );
     
     choice = in.nextLine();
-    System.out.println(choice);
     switch (choice) {
       case "0":
         Console.clear();
@@ -103,27 +110,28 @@ public class Zoo {
       case "1":
         Console.clear();
         getRandomAnimal();
-        System.out.println(choice);
         break;
       case "2":
         System.out.println("GENETIC FEATURE");
         break;
       default:
-        System.out.println("Please enter a valid option.");
+        System.out.println("Please enter a valid option for acquire animal.");
     }
   }
 
   private void getRandomAnimal() {
-    Animal animal1 = new aniTiger();
-    Animal animal2 = new aniTiger();
-    Animal animal3 = new aniTiger();
+    Animal animal1 = instanceRandomAnimal();
+    Animal animal2 = instanceRandomAnimal();
+    Animal animal3 = instanceRandomAnimal();
     //Console.clear();
-    System.out.println(
+    System.out.println( 
       "-------GET-RANDOM-ANIMAL------\n" +
       "| Choose one of the animals. |\n" +
       "|                            |\n" +
       "| (1) Name: " +
       animal1.name +
+      "| Espicies Name: " +
+      animal1.getClass().getSimpleName() +
       " | Age: " +
       animal1.age +
       " | Appeal: " +
@@ -133,6 +141,8 @@ public class Zoo {
       "|                            |\n" +
       "| (2) Name: " +
       animal2.name +
+      "| Espicies Name: " +
+      animal2.getClass().getSimpleName() +
       " | Age: " +
       animal2.age +
       " | Appeal: " +
@@ -142,6 +152,8 @@ public class Zoo {
       "|                            |\n" +
       "| (3) Name: " +
       animal3.name +
+      "| Espicies Name: " +
+      animal2.getClass().getSimpleName() +
       " | Age: " +
       animal3.age +
       " | Appeal: " +
@@ -158,7 +170,7 @@ public class Zoo {
         return;
       case "1":
         Console.clear();
-        Animal ani1 = new aniTiger(animal1.name, animal1.age);
+        Animal ani1 = new Lion(animal1.name, animal1.age, 10);
         addAnimal(ani1);
         System.out.println(choice);
         break;
@@ -173,7 +185,7 @@ public class Zoo {
         System.out.println("GENETIC CHAR");
         break;
       default:
-        System.out.println("Please enter a valid option.");
+        System.out.println("Please enter a valid option which animal to choose.");
     }
   }
 
@@ -187,6 +199,7 @@ public class Zoo {
       "-------BUILD-NEW-SETTLEMENT-------\n" +
       "| Choose one of the proposals.   |\n" +
       "|                                |\n" +
+      "|Balance="+balance+" euros              |\n" +
       "| (1) Capacity: " +
       proposal1.capacity +
       " | Price: " +
@@ -229,7 +242,7 @@ public class Zoo {
         settlementList.add(proposal3);
         break;
       default:
-        System.out.println("Please enter a valid option.");
+        System.out.println("Please enter a valid option for proposal.");
     }
   }
 
@@ -248,6 +261,7 @@ public class Zoo {
       "|     Filter by:                |\n" +
       "| (2) Genetic feature           |\n" +
       "| (3) Mutation                  |\n" +
+      "| (4) Animal by ID              |\n" +
       "|                               |\n" +
       "| (0) Go back to main menu      |\n" +
       "---------------------------------\n\n" +
@@ -257,7 +271,7 @@ public class Zoo {
     choice = in.nextLine();
     switch (choice) {
       case "0":
-        Console.clear();
+        
         return;
       case "1":
         System.out.println("ALL ANIMALS");
@@ -270,21 +284,107 @@ public class Zoo {
       case "3":
         System.out.println("MUTATION");
         break;
+      case "4":
+        System.out.println("CHOOSE ANIMAL BY ID:");
+        System.out.println(showAllAnimals());
+        System.out.println("Enter option:\n");
+        Integer temp = in.nextInt();
+        System.out.println(showAnimalById(temp));
+        break;
       default:
-        System.out.println("Please enter a valid option.");
+        System.out.println("Please enter a valid option to verify .");
     }
   }
 
-  public TreeMap<Integer, Animal> showAllAnimals(){
+  private TreeMap<Integer, Animal> showAllAnimals(){
     return inventory;
 
   } 
 
-  public void addAnimal(Animal a){
+  private String showAnimalById(int id){
+    return inventory.get(id).name;
+  }
+
+  private void addAnimal(Animal a){
     inventory.put(a.getId(), a);
   }
 
-  
+  private Animal instanceRandomAnimal(){
+    int i = new Random().nextInt(10);
+    
+    switch(i){
+      case 0:
+        chooseAni = new Lion();
+        break;
+      case 1:
+        chooseAni = new Tiger();
+        break;
+      case 2:
+        chooseAni = new Leopard();
+        break;
+      case 3:
+        chooseAni = new Lion();
+        break;
+      case 4:
+        chooseAni = new Leopard();
+        break;
+      case 5:
+        chooseAni = new Tiger();
+        break;
+      case 6:
+        chooseAni = new Lion();
+        break;
+      case 7:
+        chooseAni = new Leopard();
+        break;
+      case 8:
+        chooseAni = new Tiger();
+        break;
+      case 9:
+        chooseAni = new Lion();
+        break;
+    }
+    return chooseAni;
+  }
+
+  private Animal createNewAnimal(){
+    int i = new Random().nextInt(10);
+    
+    switch(i){
+      case 0:
+        chooseAni = new Lion();
+        break;
+      case 1:
+        chooseAni = new Tiger();
+        break;
+      case 2:
+        chooseAni = new Leopard();
+        break;
+      case 3:
+        chooseAni = new Lion();
+        break;
+      case 4:
+        chooseAni = new Leopard();
+        break;
+      case 5:
+        chooseAni = new Tiger();
+        break;
+      case 6:
+        chooseAni = new Lion();
+        break;
+      case 7:
+        chooseAni = new Leopard();
+        break;
+      case 8:
+        chooseAni = new Tiger();
+        break;
+      case 9:
+        chooseAni = new Lion();
+        break;
+    }
+    return chooseAni;
+  }
+
   private void displayInformationMenu() {}
 
   private void accountingPeriod() {

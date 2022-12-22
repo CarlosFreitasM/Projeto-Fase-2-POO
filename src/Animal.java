@@ -3,7 +3,7 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public abstract class Animal {
+public class Animal {
 
   // https://stackoverflow.com/questions/24305830/java-auto-increment-id
 
@@ -27,8 +27,9 @@ public abstract class Animal {
     "Wendy",
     "Rapunzel",
   };
+  
 
-  public abstract void interact();
+  //public abstract void interact();
 
   public Animal(){
     Random rand = new Random();
@@ -63,6 +64,11 @@ public abstract class Animal {
   public int getId() {
     return this.id;
   }
+
+  public String getName() {
+    return this.name;
+  }
+
   public int getAge() {
     return this.age;
   }
