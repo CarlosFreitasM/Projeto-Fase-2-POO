@@ -1,18 +1,20 @@
-public class Cougar extends Felidae implements Puma{
+import java.util.ArrayList;
+
+public class Cougar extends Felidae implements Puma {
     public String espName;
 
-    public Cougar(){
-        
+    public Cougar() {
+
     }
 
-    public Cougar(String name, Integer age){
-        super(name, age);
-        this.espName="Cougar";
+    public Cougar(String name, Integer age, ArrayList<String> mutationList) {
+        super(name, age, mutationList);
+        this.espName = "Cougar";
     }
 
-    public String toString(){
+    public String toString() {
         String text = super.toString();
-        text+="Da espécie: "+espName+", " + getFamily() + "::";
+        text += "Da espécie: " + espName + ", " + getFamily() + "::\n";
         return text;
     }
 }

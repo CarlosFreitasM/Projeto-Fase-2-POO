@@ -138,6 +138,8 @@ public class Zoo {
       animal1.age +
       " | Appeal: " +
       animal1.appeal +
+      " | Mutations: " +
+      animal1.mutationList +
       " |\n" +
       "----------------------------------\n\n" +
       "|                            |\n" +
@@ -149,6 +151,8 @@ public class Zoo {
       animal2.age +
       " | Appeal: " +
       animal2.appeal +
+      " | Mutations: " +
+      animal2.mutationList +
       " |\n" +
       "----------------------------------\n\n" +
       "|                            |\n" +
@@ -160,6 +164,8 @@ public class Zoo {
       animal3.age +
       " | Appeal: " +
       animal3.appeal +
+      " | Mutations: " +
+      animal3.mutationList +
       " |\n" +
       "----------------------------------\n\n" +
       "Enter an option: "
@@ -172,17 +178,17 @@ public class Zoo {
         return;
       case "1":
         Console.clear();
-        Animal ani1 = createNewAnimal(animal1.getClass().getSimpleName(), animal1.name, animal1.age);
+        Animal ani1 = createNewAnimal(animal1.getClass().getSimpleName(), animal1.name, animal1.age, animal1.mutationList);
         addAnimal(ani1);
         System.out.println(choice);
         break;
       case "2":
-        Animal ani2 = createNewAnimal(animal2.getClass().getSimpleName(), animal2.name, animal2.age);
+        Animal ani2 = createNewAnimal(animal2.getClass().getSimpleName(), animal2.name, animal2.age, animal2.mutationList);
         addAnimal(ani2);
         System.out.println("GENETIC FEATURE");
         break;
       case "3":
-        Animal ani3 = createNewAnimal(animal3.getClass().getSimpleName(), animal3.name, animal3.age);
+        Animal ani3 = createNewAnimal(animal3.getClass().getSimpleName(), animal3.name, animal3.age, animal3.mutationList);
         addAnimal(ani3);
         System.out.println("GENETIC CHAR");
         break;
@@ -288,7 +294,7 @@ public class Zoo {
         break;
       case "4":
         System.out.println("CHOOSE ANIMAL BY ID:");
-        System.out.println(showAllAnimals());
+        System.out.println(showAllAnimals() + "\n");
         System.out.println("Enter option:\n");
         Integer temp = in.nextInt();
         System.out.println(showAnimalById(temp));
@@ -348,38 +354,38 @@ public class Zoo {
     return chooseAni;
   }
 
-  private Animal createNewAnimal(String animalType, String artName, int age){
+  private Animal createNewAnimal(String animalType, String artName, int age, ArrayList<String> mutations){
     
     switch(animalType){
       case "Lion":
-        chooseAni = new Lion(artName, age);
+        chooseAni = new Lion(artName, age, mutations);
         break;
       case "Tiger":
-        chooseAni = new Tiger(artName, age);
+        chooseAni = new Tiger(artName, age, mutations);
         break;
       case "Leopard":
-        chooseAni = new Leopard(artName, age);
+        chooseAni = new Leopard(artName, age, mutations);
         break;
       case "Cheetah":
-        chooseAni = new Cheetah(artName, age);
+        chooseAni = new Cheetah(artName, age, mutations);
         break;
       case "Cougar":
-        chooseAni = new Cougar(artName, age);
+        chooseAni = new Cougar(artName, age, mutations);
         break;
       case "Wolf":
-        chooseAni = new Wolf(artName, age);
+        chooseAni = new Wolf(artName, age, mutations);
         break;
       case "Coyote":
-        chooseAni = new Coyote(artName, age);
+        chooseAni = new Coyote(artName, age, mutations);
         break;
       case "Fox":
-        chooseAni = new Fox(artName, age);
+        chooseAni = new Fox(artName, age, mutations);
         break;
       case "Firesalamandre":
-        chooseAni = new Firesalamandre(artName, age);
+        chooseAni = new Firesalamandre(artName, age, mutations);
         break;
       case "Oxolotl":
-        chooseAni = new Oxolotl(artName, age);
+        chooseAni = new Oxolotl(artName, age, mutations);
         break;
     }
     return chooseAni;

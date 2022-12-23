@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public abstract class Canidae extends Animal{
     public String animalFamily, espName;
 
@@ -11,8 +13,8 @@ public abstract class Canidae extends Animal{
         
     }
 
-    public Canidae(String name, Integer age){
-        super(name, age);
+    public Canidae(String name, Integer age, ArrayList<String> mutationList){
+        super(name, age, mutationList);
         this.id = super.getId();
         this.animalFamily= "Canidae";
     }

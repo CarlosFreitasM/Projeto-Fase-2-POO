@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Lion extends Felidae implements Pantherae{
@@ -8,8 +9,8 @@ public class Lion extends Felidae implements Pantherae{
         
     }
 
-    public Lion(String name, Integer age){
-        super(name, age);
+    public Lion(String name, Integer age, ArrayList<String> mutationList){
+        super(name, age, mutationList);
         this.id = super.getId();
         this.espName="Lion";
         this.gender=getGender();
@@ -30,7 +31,7 @@ public class Lion extends Felidae implements Pantherae{
     public String toString(){
         String text = super.toString();
         text+="Da espécie: "+espName+", ";
-        text+="Gender: "+gender+", " + getFamily() + "::";
+        text+="Gender: "+gender+", " + getFamily() + "::\n";
         return text;
     }
 }

@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Wolf extends Canidae implements Canis{
     public String espName;
 
@@ -5,8 +7,8 @@ public class Wolf extends Canidae implements Canis{
         
     }
 
-    public Wolf(String name, Integer age){
-        super(name, age);
+    public Wolf(String name, Integer age, ArrayList<String> mutationList){
+        super(name, age, mutationList);
         this.espName="Wolf";
     }
 
@@ -16,7 +18,7 @@ public class Wolf extends Canidae implements Canis{
 
     public String toString(){
         String text = super.toString();
-        text+="Da espécie: "+espName+", " + getFamily() + "::";
+        text+="Da espécie: "+espName+", " + getFamily() + "::\n";
         return text;
     }
 }
