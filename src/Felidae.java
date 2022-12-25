@@ -15,10 +15,9 @@ public abstract class Felidae extends Animal{
         
     }
 
-    public Felidae(String name, Integer age, ArrayList<String> mutationList){
-        super(name, age, mutationList);
+    public Felidae(String name, Integer age, Double appeal, ArrayList<String> mutationList){
+        super(name, age, appeal, mutationList);
         this.id = super.getId();
-        this.mutationList=super.getMutations();
         this.animalFamily= "Felidae";
     }
 
@@ -31,5 +30,16 @@ public abstract class Felidae extends Animal{
 
     }
 
+    public double calcAppealBuying(){
+        return baseAppeal*2;
+    }
+
+    public void setAppeal(){
+        this.appeal=baseAppeal*2;
+    }
+
+    public int getAdultAge(){
+        return adultAge;
+    }
     
 }

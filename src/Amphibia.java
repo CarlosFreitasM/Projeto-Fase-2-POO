@@ -12,8 +12,8 @@ public abstract class Amphibia extends Animal{
         
     }
 
-    public Amphibia(String name, Integer age, ArrayList<String> mutationList){
-        super(name, age, mutationList);
+    public Amphibia(String name, Integer age, Double appeal, ArrayList<String> mutationList){
+        super(name, age, appeal, mutationList);
         this.id = super.getId();
         this.animalFamily= "Amphibia";
     }
@@ -25,6 +25,18 @@ public abstract class Amphibia extends Animal{
     public String getFamily(){
         return animalFamily;
 
+    }
+
+    public double calcAppealBuying(){
+        return baseAppeal*1.2;
+    }
+
+    public void setAppeal(){
+        this.appeal=baseAppeal*1.2;
+    }
+
+    public int getAdultAge(){
+        return adultAge;
     }
     
 }

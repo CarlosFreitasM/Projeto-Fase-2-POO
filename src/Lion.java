@@ -6,11 +6,11 @@ public class Lion extends Felidae implements Pantherae{
     public String espName;
 
     public Lion(){
-        
+        super.setAdultAge(24);
     }
 
-    public Lion(String name, Integer age, ArrayList<String> mutationList){
-        super(name, age, mutationList);
+    public Lion(String name, Integer age, Double appeal, ArrayList<String> mutationList){
+        super(name, age, appeal, mutationList);
         this.id = super.getId();
         this.espName="Lion";
         this.gender=getGender();
@@ -23,6 +23,22 @@ public class Lion extends Felidae implements Pantherae{
        else
             return "Female";
     }
+
+
+    public double calcAppealBuying(){
+
+        return ((super.calcAppealBuying()*1.5)+super.calcAppealMultipler())*super.getAgeDeduction();
+    }
+
+    public void setAppeal(){
+        
+        this.appeal=((calcAppealBuying()*1.5)+super.calcAppealMultipler())*super.getAgeDeduction();
+    }
+
+    public int getAdultAge(){
+        return this.adultAge;
+    }
+
 
     public void growl(){
         System.out.println("Leao rugiu!");

@@ -14,7 +14,9 @@ public class Animal implements Mutation{
 
   private static final AtomicInteger count = new AtomicInteger(-1);
   private static final AtomicInteger newMethod = new AtomicInteger(-1);
-  public int id, age, appeal, multipler;
+  public int id, age, multipler, adultAge, addAppeal;
+  public final Double baseAppeal=100.0;
+  public Double appeal;
   public String name;
   public ArrayList<String> mutationList = new ArrayList<String>();
   public boolean isAlbino, isLeucism, isMelanism, isHeteroch;
@@ -40,7 +42,10 @@ public class Animal implements Mutation{
     this.id = count.incrementAndGet();
     this.name =
       artisticNames[Rand.getRandomNumberInRange(0, artisticNames.length - 1)];
-    age = rand.nextInt(30);
+    this.age = rand.nextInt(30);
+    this.addAppeal=0;
+    this.adultAge=10;
+    this.appeal=100.0;
     multipler=1;
     isAlbino=calcAlbinism(multipler);
     if(isAlbino==true){mutationList.add("Albinism");}
@@ -71,10 +76,11 @@ public class Animal implements Mutation{
 
   // De forma a fazer com que os animais que entram no zoo nao têm o ID separa por causa da criação de 3 animais de cada vez que se tenta obter quais 3 animais escolher
   // Assim, os animais que forem adicionados ao zoo têm um ID consistente e linear
-  public Animal(String name, Integer age, ArrayList<String> mutationList) {
+  public Animal(String name, Integer age, Double appeal, ArrayList<String> mutationList) {
     this.id = newMethod.incrementAndGet();
     this.name = name;
     this.age=age;
+    this.appeal=appeal;
     this.mutationList=mutationList;
   }
 
@@ -103,7 +109,26 @@ public class Animal implements Mutation{
     return chanc;
   }
 
-
+  public int calcAppealMultipler(){
+    this.addAppeal=0;
+    for(int j=0; j<mutationList.size(); j++){
+      switch(mutationList.get(j)){
+        case "Albinism":
+          this.addAppeal+=200;
+          break;
+        case "Leucism":
+          this.addAppeal+=250;
+          break;
+        case "Melanism":
+          this.addAppeal+=300;
+          break;
+        case "Heterochromia":
+          this.addAppeal+=150;
+          break;
+      }
+    }
+    return addAppeal;
+  }
   // GETTERS
  
   public int getId() {
@@ -122,7 +147,25 @@ public class Animal implements Mutation{
     return this.mutationList;
   }
 
+  public double getAppeal(){
+    return this.appeal;
+  }
+
+  public double getAgeDeduction(){
+
+    if((1-((age/adultAge)*0.3))<=0.7){
+        return 0.7;
+    }else{
+        return 1-(age*0.3/adultAge);
+    }
+
+}
+
   // SETTERS
+
+  public void setAdultAge(int adultAge){
+    this.adultAge=adultAge;
+  }
 
   public void setAge(int amount) {
     if (amount <= 0) {
@@ -131,11 +174,15 @@ public class Animal implements Mutation{
     this.age += amount;
   }
 
+  
+
   public String toString(){
     String text;
-    text ="Código do animal: "+id+", ";
-    text+="Nome: "+name+", ";
-    text+="Idade: "+age+", ";
+    text ="Code: "+id+", ";
+    text+="Name: "+name+", ";
+    text+="Age: "+age+", ";
+    text+="List of Mutations: "+mutationList+", ";
+    text+="Appeal of: "+appeal+", ";
     return text;
   }
 }

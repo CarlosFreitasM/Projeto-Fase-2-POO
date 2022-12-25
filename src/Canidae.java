@@ -13,8 +13,8 @@ public abstract class Canidae extends Animal{
         
     }
 
-    public Canidae(String name, Integer age, ArrayList<String> mutationList){
-        super(name, age, mutationList);
+    public Canidae(String name, Integer age, Double appeal, ArrayList<String> mutationList){
+        super(name, age, appeal, mutationList);
         this.id = super.getId();
         this.animalFamily= "Canidae";
     }
@@ -26,5 +26,17 @@ public abstract class Canidae extends Animal{
     public String getFamily(){
         return animalFamily;
 
+    }
+
+    public double calcAppealBuying(){
+        return baseAppeal*1.7;
+    }
+
+    public void setAppeal(){
+        this.appeal=baseAppeal*1.7;
+    }
+
+    public int getAdultAge(){
+        return adultAge;
     }
 }
