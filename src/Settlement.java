@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class Settlement {
 
-  public int capacity, price;
-  private final int MIN_CAPACITY = 10, MAX_CAPACITY = MIN_CAPACITY * 2;
-  public Animal[] animalList;
+  private int capacity, price;
+  private final int MIN_CAPACITY = 1, MAX_CAPACITY = MIN_CAPACITY * 2;
+  private Animal[] animalList;
 
   public Settlement() {
     // Generate capacity between 10 and 20
@@ -25,6 +25,18 @@ public class Settlement {
   }
 
   // GETTERS
+
+  public int getCapacity() {
+    return this.capacity;
+  }
+
+  public int getPrice() {
+    return this.price;
+  }
+
+  public Animal[] getAnimalList() {
+    return this.animalList;
+  }
 
   public int getAnimalCount() {
     int animalCount = 0;
@@ -45,6 +57,10 @@ public class Settlement {
     }
     return animals;
   }
+
   // SETTERS
 
+  public void setAnimalList(Animal[] newAnimalList) {
+    this.animalList = newAnimalList;
+  }
 }
