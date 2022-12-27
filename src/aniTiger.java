@@ -2,7 +2,7 @@ public class aniTiger extends Animal {
 
   public aniTiger() {}
 
-  public aniTiger(String name, Integer age){
+  public aniTiger(String name, Integer age) {
     super(name, age);
   }
 

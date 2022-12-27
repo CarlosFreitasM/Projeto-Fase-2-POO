@@ -17,9 +17,9 @@ public class Animal implements Mutation {
   public int id, age, multipler, adultAge, addAppeal;
   public final Double baseAppeal = 100.0;
   public Double appeal;
-  public String name;
+  private String name;
   public ArrayList<String> mutationList = new ArrayList<String>();
-  public boolean isAlbino, isLeucism, isMelanism, isHeteroch;
+  private boolean isAlbino, isLeucism, isMelanism, isHeteroch;
   //HashMap<String, Double> mutationList = Mutations.createHashMap();
   private final String[] artisticNames = {
     "Pong",

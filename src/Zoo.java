@@ -51,18 +51,6 @@ public class Zoo {
         "Enter an option: "
       );
 
-      /* 
-      PRINT SETTLEMENT LIST
-
-      for (int i = 0; i < settlementList.size(); i++) System.out.println(
-        "SETTLEMENT: " +
-        "\ncap: " +
-        settlementList.get(i).capacity +
-        "\nprice: " +
-        settlementList.get(i).price
-      );
-      */
-
       choice = in.nextLine();
       switch (choice) {
         case "0":
@@ -72,10 +60,8 @@ public class Zoo {
           Console.clear();
           acquireAnimalMenu();
           break;
-        //Console.clear();
         case "2":
           buildSettlement();
-          System.out.println("get rekt");
           break;
         case "3":
           placeAnimalInSettlement();
@@ -145,41 +131,41 @@ public class Zoo {
       "| Choose one of the animals. |\n" +
       "|                            |\n" +
       "| (1) Name: " +
-      animal1.name +
+      animal1.getName() +
       "| Espicies Name: " +
       animal1.getClass().getSimpleName() +
       " | Age: " +
-      animal1.age +
+      animal1.getAge() +
       " | Appeal: " +
       getAppealOfAnimal(animal1) +
       " | Mutations: " +
-      animal1.mutationList +
+      animal1.getMutations() +
       " |\n" +
       "----------------------------------\n\n" +
       "|                            |\n" +
       "| (2) Name: " +
-      animal2.name +
+      animal2.getName() +
       "| Espicies Name: " +
       animal2.getClass().getSimpleName() +
       " | Age: " +
-      animal2.age +
+      animal2.getAge() +
       " | Appeal: " +
       getAppealOfAnimal(animal2) +
       " | Mutations: " +
-      animal2.mutationList +
+      animal2.getMutations() +
       " |\n" +
       "----------------------------------\n\n" +
       "|                            |\n" +
       "| (3) Name: " +
-      animal3.name +
+      animal3.getName() +
       "| Espicies Name: " +
       animal3.getClass().getSimpleName() +
       " | Age: " +
-      animal3.age +
+      animal3.getAge() +
       " | Appeal: " +
       getAppealOfAnimal(animal3) +
       " | Mutations: " +
-      animal3.mutationList +
+      animal3.getMutations() +
       " |\n" +
       "----------------------------------\n\n" +
       "Enter an option: "
@@ -194,10 +180,10 @@ public class Zoo {
         Console.clear();
         Animal ani1 = createNewAnimal(
           animal1.getClass().getSimpleName(),
-          animal1.name,
-          animal1.age,
+          animal1.getName(),
+          animal1.getAge(),
           getAppealOfAnimal(animal1),
-          animal1.mutationList
+          animal1.getMutations()
         );
         addAnimal(ani1);
         System.out.println(choice);
@@ -205,10 +191,10 @@ public class Zoo {
       case "2":
         Animal ani2 = createNewAnimal(
           animal2.getClass().getSimpleName(),
-          animal2.name,
-          animal2.age,
+          animal2.getName(),
+          animal2.getAge(),
           getAppealOfAnimal(animal2),
-          animal2.mutationList
+          animal2.getMutations()
         );
         addAnimal(ani2);
         System.out.println("GENETIC FEATURE");
@@ -216,10 +202,10 @@ public class Zoo {
       case "3":
         Animal ani3 = createNewAnimal(
           animal3.getClass().getSimpleName(),
-          animal3.name,
-          animal3.age,
+          animal3.getName(),
+          animal3.getAge(),
           getAppealOfAnimal(animal3),
-          animal3.mutationList
+          animal3.getMutations()
         );
         addAnimal(ani3);
         System.out.println("GENETIC CHAR");
@@ -310,9 +296,9 @@ public class Zoo {
         "| (" +
         entry.getKey() +
         ") " +
-        entry.getValue().name +
+        entry.getValue().getName() +
         ", " +
-        entry.getValue().appeal
+        entry.getValue().getAppeal()
       );
     }
     System.out.println(
@@ -396,7 +382,12 @@ public class Zoo {
                   for (int q = 0; q < animals.size(); q++) {
                     Animal ani = animals.get(q);
                     System.out.println(
-                      "| (" + ani.id + ") " + ani.name + ", " + ani.appeal
+                      "| (" +
+                      ani.getId() +
+                      ") " +
+                      ani.getName() +
+                      ", " +
+                      ani.getAppeal()
                     );
                   }
                   System.out.println(
@@ -570,9 +561,9 @@ public class Zoo {
         "| (" +
         entry.getKey() +
         ") " +
-        entry.getValue().name +
+        entry.getValue().getName() +
         ", " +
-        entry.getValue().appeal
+        entry.getValue().getAppeal()
       );
     }
     System.out.println(
@@ -586,7 +577,7 @@ public class Zoo {
 
   private String showAnimalById(int id) {
     try {
-      return inventory.get(id).name;
+      return inventory.get(id).getName();
     } catch (NullPointerException e) {
       System.out.println("A posição que tentou aceder tem valor null!");
       return "";
