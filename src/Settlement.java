@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 // Maybe delete capacity and get animal list size instead
 
 public class Settlement {
@@ -21,4 +23,28 @@ public class Settlement {
     System.out.println("CAPACITY: " + capacity);
     System.out.println("PRICE: " + price);
   }
+
+  // GETTERS
+
+  public int getAnimalCount() {
+    int animalCount = 0;
+    for (Animal animal : this.animalList) {
+      if (animal != null) {
+        animalCount++;
+      }
+    }
+    return animalCount;
+  }
+
+  public ArrayList<Animal> getAnimals() {
+    ArrayList<Animal> animals = new ArrayList<Animal>();
+    for (Animal animal : this.animalList) {
+      if (animal != null) {
+        animals.add(animal);
+      }
+    }
+    return animals;
+  }
+  // SETTERS
+
 }
