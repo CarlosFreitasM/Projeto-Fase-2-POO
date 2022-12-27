@@ -489,7 +489,7 @@ public class Zoo {
         return;
       case "1":
         System.out.println("ALL ANIMALS");
-        System.out.println(showAllAnimals());
+        showAllAnimals();
 
         break;
       case "2":
@@ -500,7 +500,8 @@ public class Zoo {
         break;
       case "4":
         System.out.println("CHOOSE ANIMAL BY ID:");
-        System.out.println(showAllAnimals() + "\n");
+        //System.out.println(showAllAnimals() + "\n");
+        showAllAnimals();
         System.out.println("Enter option:\n");
         Integer temp = in.nextInt();
         System.out.println(showAnimalById(temp));
@@ -552,8 +553,35 @@ public class Zoo {
     String any = in.nextLine();
   }
 
+  /*
   private TreeMap<Integer, Animal> showAllAnimals() {
     return inventory;
+  }
+  */
+
+  private void showAllAnimals() {
+    System.out.println(
+      "-----------INVENTORY----------<\n" +
+      "| Showing id, name and appeal.\n" +
+      "|"
+    );
+    for (Map.Entry<Integer, Animal> entry : inventory.entrySet()) { // PRINTS ANIMAL INVENTORY
+      System.out.println(
+        "| (" +
+        entry.getKey() +
+        ") " +
+        entry.getValue().name +
+        ", " +
+        entry.getValue().appeal
+      );
+    }
+    System.out.println(
+      "| \n" +
+      "------------------------------<\n\n" +
+      "Enter any key to return to main menu:"
+    );
+    String any = in.nextLine();
+    Console.clear();
   }
 
   private String showAnimalById(int id) {
