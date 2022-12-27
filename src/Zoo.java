@@ -12,8 +12,8 @@ public class Zoo {
 
   private int balance;
   private TreeMap<Integer, Animal> inventory;
-  private ArrayList<Settlement> settlementList = new ArrayList<Settlement>();
-  private ArrayList<Animal> typeanimals = new ArrayList<>();
+  private ArrayList<Settlement> settlementList;
+  private ArrayList<Animal> typeanimals;
 
   private boolean running = true;
   private String choice;
@@ -23,8 +23,10 @@ public class Zoo {
   Menu menu = new Menu();
 
   public Zoo() {
-    balance = 20000;
-    inventory = new TreeMap<Integer, Animal>();
+    this.balance = 20000;
+    this.inventory = new TreeMap<Integer, Animal>();
+    this.settlementList = new ArrayList<Settlement>();
+    this.typeanimals = new ArrayList<>();
   }
 
   // METHODS
