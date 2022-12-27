@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Settlement {
 
   private int capacity, price;
-  private final int MIN_CAPACITY = 1, MAX_CAPACITY = MIN_CAPACITY * 2;
+  private final int MIN_CAPACITY = 10, MAX_CAPACITY = MIN_CAPACITY * 2;
   private Animal[] animalList;
 
   public Settlement() {
