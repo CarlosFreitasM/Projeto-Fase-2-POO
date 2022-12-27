@@ -87,7 +87,7 @@ public class Zoo {
           showAnimalsMenu();
           break;
         case "6":
-          // showSettlements();
+          showSettlements();
           break;
         case "7":
           // displayInformationMenu();
@@ -245,19 +245,19 @@ public class Zoo {
       "|                                |\n" +
       "| Choose one of the proposals.   |\n" +
       "| (1) Capacity: " +
-      proposal1.capacity +
+      proposal1.getCapacity() +
       " | Price: " +
-      proposal1.price +
+      proposal1.getPrice() +
       " |\n" +
       "| (2) Capacity: " +
-      proposal2.capacity +
+      proposal2.getCapacity() +
       " | Price: " +
-      proposal2.price +
+      proposal2.getPrice() +
       " |\n" +
       "| (3) Capacity: " +
-      proposal3.capacity +
+      proposal3.getCapacity() +
       " | Price: " +
-      proposal3.price +
+      proposal3.getPrice() +
       " |\n" +
       "|                                |\n" +
       "| (0) Go back to main menu       |\n" +
@@ -272,15 +272,15 @@ public class Zoo {
         return;
       case "1":
         Console.clear();
-        if (buy(proposal1.price)) settlementList.add(proposal1);
+        if (buy(proposal1.getPrice())) settlementList.add(proposal1);
         break;
       case "2":
         Console.clear();
-        if (buy(proposal2.price)) settlementList.add(proposal2);
+        if (buy(proposal2.getPrice())) settlementList.add(proposal2);
         break;
       case "3":
         Console.clear();
-        if (buy(proposal3.price)) settlementList.add(proposal3);
+        if (buy(proposal3.getPrice())) settlementList.add(proposal3);
         break;
       default:
         System.out.println("Please enter a valid option.");
@@ -289,7 +289,15 @@ public class Zoo {
 
   private void placeAnimalInSettlement() {
     Console.clear();
-    // for (int i = 0; i < settlementList.size(); i++) System.out.println(
+
+    if (inventory.isEmpty()) {
+      System.out.println(
+        "There are no animals in the inventory.\n\nEnter any key to return to main menu:"
+      );
+      String any = in.nextLine();
+      return;
+    }
+
     System.out.println(
       "--------PLACE-ANIMAL--------<\n" +
       "|\n" +
@@ -297,8 +305,7 @@ public class Zoo {
       "| Showing id, name and appeal.\n" +
       "|"
     );
-    // PRINTS ANIMAL INVENTORY
-    for (Map.Entry<Integer, Animal> entry : inventory.entrySet()) {
+    for (Map.Entry<Integer, Animal> entry : inventory.entrySet()) { // PRINTS ANIMAL INVENTORY
       System.out.println(
         "| (" +
         entry.getKey() +
@@ -310,31 +317,144 @@ public class Zoo {
     }
     System.out.println(
       "|\n" +
-      "| (X) Go back to main menu.       \n" +
-      "---------------------------<\n\n" +
+      "| (X) Return to main menu.       \n" +
+      "--------------------------<\n\n" +
       "Enter an option: "
     );
 
     String y = in.nextLine();
+    int animalId;
     switch (y) {
       case "X":
       case "x":
         Console.clear();
         return;
-      case "1":
-        Console.clear();
-
-        break;
-      case "2":
-        Console.clear();
-
-        break;
-      case "3":
-        Console.clear();
-
-        break;
       default:
-        System.out.println("Please enter a valid option.");
+        if (Utils.isNumeric(y)) {
+          animalId = Integer.parseInt(y);
+          Settlement settlement;
+          if (settlementList.isEmpty()) {
+            Console.clear();
+            System.out.println(
+              "There are no settlements built." +
+              "\nEnter any key to return to main menu:"
+            );
+            String any = in.nextLine();
+            return;
+          }
+          Console.clear();
+          System.out.println(
+            "-------PLACE-ANIMAL------<\n" +
+            "|                       \n" +
+            "| Select a settlement:"
+          );
+          // Print settlements
+          for (int i = 0; i < settlementList.size(); i++) {
+            settlement = settlementList.get(i);
+            System.out.println(
+              "| (" +
+              i +
+              ") Housing space: " +
+              settlement.getAnimalCount() +
+              "/" +
+              settlement.getCapacity()
+            );
+          }
+          System.out.println(
+            "|\n" +
+            "| (X) Return to main menu.       \n" +
+            "--------------------------<\n" +
+            "Enter an option:\n"
+          );
+          String z = in.nextLine();
+          int settlementId;
+
+          switch (z) {
+            case "X":
+            case "x":
+              Console.clear();
+              return;
+            default:
+              if (Utils.isNumeric(z)) {
+                settlementId = Integer.parseInt(z);
+                Settlement stl = settlementList.get(settlementId);
+
+                if (stl.getAnimalCount() == stl.getCapacity()) {
+                  // SETTLEMENT IS FULL; MUST REPLACE AN ANIMAL
+                  ArrayList<Animal> animals = settlementList
+                    .get(settlementId)
+                    .getAnimals();
+
+                  System.out.println(
+                    "-------PLACE-ANIMAL-----------<\n" +
+                    "|\n" +
+                    "| Select animal to replace:\n" +
+                    "| Showing id, name and appeal.\n" +
+                    "|"
+                  );
+                  // PRINTS ANIMALS
+                  for (int q = 0; q < animals.size(); q++) {
+                    Animal ani = animals.get(q);
+                    System.out.println(
+                      "| (" + ani.id + ") " + ani.name + ", " + ani.appeal
+                    );
+                  }
+                  System.out.println(
+                    "\n| (X) Return to main menu." +
+                    "|\n----------------<\n" +
+                    "Enter an option:\n"
+                  );
+                  String w = in.nextLine();
+                  int animalToReplaceId;
+                  switch (w) {
+                    case "X":
+                    case "x":
+                      Console.clear();
+                      return;
+                    default:
+                      if (Utils.isNumeric(w)) {
+                        animalToReplaceId = Integer.parseInt(w);
+                        Animal[] newAnimalList = stl.getAnimalList();
+                        for (int j = 0; j < newAnimalList.length; j++) {
+                          if (newAnimalList[j].getId() == animalToReplaceId) {
+                            Animal inventoryAnimal = inventory.get(animalId); // Gets animal from inventory
+                            Animal settlementAnimal = newAnimalList[j]; // Gets animal from settlement
+                            inventory.replace(animalId, settlementAnimal); // Places previous settlement animal in inventory
+                            newAnimalList[j] = inventoryAnimal; // Places previous inventory animal in settlement
+                            stl.setAnimalList(newAnimalList); // Sets the new animal list
+                            settlementList.set(settlementId, stl); // Updates settlement
+                            Console.clear();
+                            System.out.println(
+                              "Animal successfully placed.\n" +
+                              "\nEnter any key to return to main menu:"
+                            );
+                            String any = in.nextLine();
+                          }
+                        }
+                      } else {
+                        System.out.println("Please enter a valid ID.");
+                      }
+                  }
+                } else { // PLACES ANIMAL IN EMPTY SLOT
+                  for (int p = 0; p < stl.getAnimalList().length; p++) {
+                    if (stl.getAnimalList()[p] == null) { // Finds empty slot to place animal
+                      Animal a = inventory.get(animalId); // Gets animal from inventory
+                      inventory.remove(animalId); // Removes animal from inventory
+                      stl.getAnimalList()[p] = a; // Places animal
+                      Console.clear();
+                      System.out.println(
+                        "Animal successfully placed.\n" +
+                        "\nEnter any key to return to main menu:"
+                      );
+                      String any = in.nextLine();
+                      break; // Jumps out of the loop
+                    }
+                  }
+                  settlementList.set(settlementId, stl); // Updates settlement
+                }
+              } else System.out.println("Please enter a valid option.");
+          }
+        } else System.out.println("Please enter a valid option.");
     }
   }
 
@@ -389,6 +509,47 @@ public class Zoo {
       default:
         System.out.println("Please enter a valid option to verify .");
     }
+  }
+
+  private void showSettlements() {
+    Console.clear();
+    if (settlementList.isEmpty()) {
+      System.out.println(
+        "There are no settlements built.\n\nEnter any key to return to main menu:"
+      );
+      String any = in.nextLine();
+      return;
+    }
+
+    Settlement settlement;
+    System.out.println(
+      "----------SETTLEMENTS----------<\n" +
+      "|\n| Showing name, appeal and age.\n|"
+    );
+    for (int i = 0; i < settlementList.size(); i++) {
+      settlement = settlementList.get(i);
+
+      System.out.println(
+        "| Occupation: " +
+        settlement.getAnimalCount() +
+        "/" +
+        settlement.getCapacity() +
+        "\n| Current animals:"
+      );
+      ArrayList<Animal> settlementAnimals = settlement.getAnimals();
+      if (settlementAnimals.isEmpty()) System.out.println("| None");
+      for (int j = 0; j < settlementAnimals.size(); j++) {
+        Animal a = settlementAnimals.get(j);
+        System.out.println(
+          "| " + a.getName() + ", " + a.getAppeal() + ", " + a.getAge()
+        );
+      }
+      System.out.println("|");
+    }
+    System.out.println(
+      "--------------------<\n" + "\nEnter any key to return to main menu:"
+    );
+    String any = in.nextLine();
   }
 
   private TreeMap<Integer, Animal> showAllAnimals() {
