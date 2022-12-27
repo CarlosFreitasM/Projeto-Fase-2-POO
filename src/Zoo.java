@@ -76,7 +76,7 @@ public class Zoo {
           System.out.println("get rekt");
           break;
         case "3":
-          // placeAnimal();
+          placeAnimalInSettlement();
           break;
         case "4":
           // boostAnimal();
@@ -279,6 +279,57 @@ public class Zoo {
       case "3":
         Console.clear();
         if (buy(proposal3.price)) settlementList.add(proposal3);
+        break;
+      default:
+        System.out.println("Please enter a valid option.");
+    }
+  }
+
+  private void placeAnimalInSettlement() {
+    Console.clear();
+    // for (int i = 0; i < settlementList.size(); i++) System.out.println(
+    System.out.println(
+      "--------PLACE-ANIMAL--------<\n" +
+      "|\n" +
+      "| Select an animal to place.\n" +
+      "| Showing id, name and appeal.\n" +
+      "|"
+    );
+    // PRINTS ANIMAL INVENTORY
+    for (Map.Entry<Integer, Animal> entry : inventory.entrySet()) {
+      System.out.println(
+        "| (" +
+        entry.getKey() +
+        ") " +
+        entry.getValue().name +
+        ", " +
+        entry.getValue().appeal
+      );
+    }
+    System.out.println(
+      "|\n" +
+      "| (X) Go back to main menu.       \n" +
+      "---------------------------<\n\n" +
+      "Enter an option: "
+    );
+
+    String y = in.nextLine();
+    switch (y) {
+      case "X":
+      case "x":
+        Console.clear();
+        return;
+      case "1":
+        Console.clear();
+
+        break;
+      case "2":
+        Console.clear();
+
+        break;
+      case "3":
+        Console.clear();
+
         break;
       default:
         System.out.println("Please enter a valid option.");
