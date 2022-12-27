@@ -1,11 +1,11 @@
 import java.nio.channels.SelectableChannel;
-import java.util.Random;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.TreeMap;
-
+import javax.lang.model.util.ElementScanner6;
 import javax.swing.WindowConstants;
 
 public class Zoo {
@@ -14,7 +14,7 @@ public class Zoo {
   private TreeMap<Integer, Animal> inventory;
   private ArrayList<Settlement> settlementList = new ArrayList<Settlement>();
   private ArrayList<Animal> typeanimals = new ArrayList<>();
-  
+
   private boolean running = true;
   private String choice;
   private Double totalAppeal;
@@ -23,10 +23,8 @@ public class Zoo {
   Menu menu = new Menu();
 
   public Zoo() {
-
-    balance = 2000;
+    balance = 20000;
     inventory = new TreeMap<Integer, Animal>();
-    
   }
 
   // METHODS
@@ -50,6 +48,19 @@ public class Zoo {
         "---------------------------------\n\n" +
         "Enter an option: "
       );
+
+      /* 
+      PRINT SETTLEMENT LIST
+
+      for (int i = 0; i < settlementList.size(); i++) System.out.println(
+        "SETTLEMENT: " +
+        "\ncap: " +
+        settlementList.get(i).capacity +
+        "\nprice: " +
+        settlementList.get(i).price
+      );
+      */
+
       choice = in.nextLine();
       switch (choice) {
         case "0":
@@ -104,7 +115,7 @@ public class Zoo {
       "---------------------------------\n\n" +
       "Enter an option: "
     );
-    
+
     choice = in.nextLine();
     switch (choice) {
       case "0":
@@ -127,7 +138,7 @@ public class Zoo {
     Animal animal2 = instanceRandomAnimal();
     Animal animal3 = instanceRandomAnimal();
     //Console.clear();
-    System.out.println( 
+    System.out.println(
       "-------GET-RANDOM-ANIMAL------\n" +
       "| Choose one of the animals. |\n" +
       "|                            |\n" +
@@ -164,7 +175,7 @@ public class Zoo {
       " | Age: " +
       animal3.age +
       " | Appeal: " +
-      getAppealOfAnimal(animal3) + 
+      getAppealOfAnimal(animal3) +
       " | Mutations: " +
       animal3.mutationList +
       " |\n" +
@@ -179,22 +190,42 @@ public class Zoo {
         return;
       case "1":
         Console.clear();
-        Animal ani1 = createNewAnimal(animal1.getClass().getSimpleName(), animal1.name, animal1.age, getAppealOfAnimal(animal1), animal1.mutationList);
+        Animal ani1 = createNewAnimal(
+          animal1.getClass().getSimpleName(),
+          animal1.name,
+          animal1.age,
+          getAppealOfAnimal(animal1),
+          animal1.mutationList
+        );
         addAnimal(ani1);
         System.out.println(choice);
         break;
       case "2":
-        Animal ani2 = createNewAnimal(animal2.getClass().getSimpleName(), animal2.name, animal2.age, getAppealOfAnimal(animal2), animal2.mutationList);
+        Animal ani2 = createNewAnimal(
+          animal2.getClass().getSimpleName(),
+          animal2.name,
+          animal2.age,
+          getAppealOfAnimal(animal2),
+          animal2.mutationList
+        );
         addAnimal(ani2);
         System.out.println("GENETIC FEATURE");
         break;
       case "3":
-        Animal ani3 = createNewAnimal(animal3.getClass().getSimpleName(), animal3.name, animal3.age, getAppealOfAnimal(animal3), animal3.mutationList);
+        Animal ani3 = createNewAnimal(
+          animal3.getClass().getSimpleName(),
+          animal3.name,
+          animal3.age,
+          getAppealOfAnimal(animal3),
+          animal3.mutationList
+        );
         addAnimal(ani3);
         System.out.println("GENETIC CHAR");
         break;
       default:
-        System.out.println("Please enter a valid option which animal to choose.");
+        System.out.println(
+          "Please enter a valid option which animal to choose."
+        );
     }
   }
 
@@ -206,9 +237,11 @@ public class Zoo {
     Console.clear();
     System.out.println(
       "-------BUILD-NEW-SETTLEMENT-------\n" +
-      "| Choose one of the proposals.   |\n" +
+      "| Balance: " +
+      this.balance +
+      " euros            |\n" +
       "|                                |\n" +
-      "|Balance="+balance+" euros              |\n" +
+      "| Choose one of the proposals.   |\n" +
       "| (1) Capacity: " +
       proposal1.capacity +
       " | Price: " +
@@ -237,29 +270,29 @@ public class Zoo {
         return;
       case "1":
         Console.clear();
-        buy(proposal1.price);
-        settlementList.add(proposal1); //Bugged
+        if (buy(proposal1.price)) settlementList.add(proposal1);
         break;
       case "2":
         Console.clear();
-        buy(proposal2.price);
-        settlementList.add(proposal2);
+        if (buy(proposal2.price)) settlementList.add(proposal2);
         break;
       case "3":
         Console.clear();
-        buy(proposal3.price);
-        settlementList.add(proposal3);
+        if (buy(proposal3.price)) settlementList.add(proposal3);
         break;
       default:
-        System.out.println("Please enter a valid option for proposal.");
+        System.out.println("Please enter a valid option.");
     }
   }
 
-  private void buy(int price) {
+  private boolean buy(int price) {
     if (getBalance() > price) {
       addBalance(-price);
       System.out.println("Purchase Successful.");
-    } else System.out.println("You don't have enough money.");
+      return true;
+    }
+    System.out.println("You don't have enough money.");
+    return false;
   }
 
   private void showAnimalsMenu() {
@@ -280,12 +313,11 @@ public class Zoo {
     choice = in.nextLine();
     switch (choice) {
       case "0":
-        
         return;
       case "1":
         System.out.println("ALL ANIMALS");
         System.out.println(showAllAnimals());
-        
+
         break;
       case "2":
         System.out.println("GENETIC FEATURE");
@@ -306,30 +338,26 @@ public class Zoo {
     }
   }
 
-  private TreeMap<Integer, Animal> showAllAnimals(){
+  private TreeMap<Integer, Animal> showAllAnimals() {
     return inventory;
-
-  } 
-
-  private String showAnimalById(int id) {
-    try{
-      return inventory.get(id).name;
-    }
-    catch (NullPointerException e)
-    {
-        System.out.println("A posição que tentou aceder tem valor null!");
-        return "";
-    }
-    
   }
 
-  private void addAnimal(Animal a){
+  private String showAnimalById(int id) {
+    try {
+      return inventory.get(id).name;
+    } catch (NullPointerException e) {
+      System.out.println("A posição que tentou aceder tem valor null!");
+      return "";
+    }
+  }
+
+  private void addAnimal(Animal a) {
     inventory.put(a.getId(), a);
   }
 
-  private Animal instanceRandomAnimal(){
+  private Animal instanceRandomAnimal() {
     int i = new Random().nextInt(10);
-    switch(i){
+    switch (i) {
       case 0:
         chooseAni = new Lion();
         break;
@@ -364,50 +392,50 @@ public class Zoo {
     return chooseAni;
   }
 
-  private Double getAppealOfAnimal(Animal a){
-    switch(a.getClass().getSimpleName()){
+  private Double getAppealOfAnimal(Animal a) {
+    switch (a.getClass().getSimpleName()) {
       case "Lion":
-
-        totalAppeal=((Lion)a).calcAppealBuying();
+        totalAppeal = ((Lion) a).calcAppealBuying();
         break;
       case "Tiger":
-
-        totalAppeal=((Tiger)a).calcAppealBuying();
+        totalAppeal = ((Tiger) a).calcAppealBuying();
         break;
       case "Leopard":
-
-        totalAppeal=((Leopard)a).calcAppealBuying();
+        totalAppeal = ((Leopard) a).calcAppealBuying();
         break;
       case "Cheetah":
-
-        totalAppeal=((Cheetah)a).calcAppealBuying();
+        totalAppeal = ((Cheetah) a).calcAppealBuying();
         break;
       case "Cougar":
-
-        totalAppeal=((Cougar)a).calcAppealBuying();
+        totalAppeal = ((Cougar) a).calcAppealBuying();
         break;
       case "Wolf":
-        totalAppeal=((Wolf)a).calcAppealBuying();
+        totalAppeal = ((Wolf) a).calcAppealBuying();
         break;
       case "Coyote":
-        totalAppeal=((Coyote)a).calcAppealBuying();
+        totalAppeal = ((Coyote) a).calcAppealBuying();
         break;
       case "Fox":
-        totalAppeal=((Fox)a).calcAppealBuying();
+        totalAppeal = ((Fox) a).calcAppealBuying();
         break;
       case "Firesalamandre":
-        totalAppeal=((Firesalamandre)a).calcAppealBuying();
+        totalAppeal = ((Firesalamandre) a).calcAppealBuying();
         break;
       case "Oxolotl":
-        totalAppeal=((Oxolotl)a).calcAppealBuying();
+        totalAppeal = ((Oxolotl) a).calcAppealBuying();
         break;
     }
     return Math.floor(totalAppeal * 100) / 100;
   }
 
-  private Animal createNewAnimal(String animalType, String artName, int age, Double appeal, ArrayList<String> mutations){
-    
-    switch(animalType){
+  private Animal createNewAnimal(
+    String animalType,
+    String artName,
+    int age,
+    Double appeal,
+    ArrayList<String> mutations
+  ) {
+    switch (animalType) {
       case "Lion":
         chooseAni = new Lion(artName, age, appeal, mutations);
         break;
