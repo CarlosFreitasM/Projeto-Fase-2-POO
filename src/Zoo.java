@@ -168,6 +168,7 @@ public class Zoo {
         System.out.println("Please enter a valid option for acquire animal.");
     }
   }
+
   // The user will be presented with 3 random animals he can choose, showing the name, species name, age and mutations of said animal
   private void getRandomAnimal() {
     Animal animal1 = instanceRandomAnimal();
@@ -267,7 +268,8 @@ public class Zoo {
         );
     }
   }
-  //The user can choose of which genetics he wants his animal 
+
+  //The user can choose of which genetics he wants his animal
   private void getSpecifAnimal(ArrayList<Animal> an) {
     Animal animal1 = an.get(0);
     Animal animal2 = an.get(1);
@@ -366,6 +368,7 @@ public class Zoo {
         );
     }
   }
+
   // The user is able to build/buy a settlement in exchange of some money
   private void buildSettlement() {
     Settlement proposal1 = new Settlement();
@@ -422,7 +425,8 @@ public class Zoo {
         System.out.println("Please enter a valid option.");
     }
   }
-  // First will appear all the available animals that haven't been placed in a settlement and then it'll show all settlements 
+
+  // First will appear all the available animals that haven't been placed in a settlement and then it'll show all settlements
   private void placeAnimalInSettlement() {
     Console.clear();
 
@@ -599,7 +603,8 @@ public class Zoo {
         } else System.out.println("Please enter a valid option.");
     }
   }
-  //Buying a settlement will cost money, so it'll be deducted from the zoo's balance. 
+
+  //Buying a settlement will cost money, so it'll be deducted from the zoo's balance.
   private boolean buy(int price) {
     if (getBalance() > price) {
       addBalance(-price);
@@ -609,6 +614,7 @@ public class Zoo {
     System.out.println("You don't have enough money.");
     return false;
   }
+
   // A menu where it shows 4 diferent options: ALL, GENETIC, MUTATIONS and BY ID
   private void showAnimalsMenu() {
     Console.clear();
@@ -660,6 +666,7 @@ public class Zoo {
         System.out.println("Please enter a valid option to verify .");
     }
   }
+
   //The system will show to the user all settlements
   private void showSettlements() {
     Console.clear();
@@ -728,6 +735,7 @@ public class Zoo {
     String any = in.nextLine();
     Console.clear();
   }
+
   // The system will show all genetic options available
   private void showByGenetics() throws ClassNotFoundException {
     System.out.println(
@@ -923,6 +931,7 @@ public class Zoo {
     String any = in.nextLine();
     Console.clear();
   }
+
   //Will show to the user all mutations available
   private void showByMutations() {
     System.out.println(
@@ -959,7 +968,6 @@ public class Zoo {
               entry.getValue().getAppeal() +
               ", " +
               entry.getValue().getMutations()
-              
             );
           }
         }
@@ -1040,6 +1048,7 @@ public class Zoo {
     String any = in.nextLine();
     Console.clear();
   }
+
   // Shows all the animals by their id
   private String showAnimalById(int id) {
     try {
@@ -1049,6 +1058,7 @@ public class Zoo {
       return "";
     }
   }
+
   // The system will show all genetic options available diferent from showByGenetics. This one is used to only show the animals with that genetics and the animal is already bought
   private void showGenetic()
     throws ClassNotFoundException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
@@ -1304,10 +1314,12 @@ public class Zoo {
         System.out.println("Please enter a valid Genetic option.");
     }
   }
+
   // Funtion that adds an animal and inserts it into the inventory
   private void addAnimal(Animal a) {
     inventory.put(a.getId(), a);
   }
+
   // Making an instance of a random animal so that it can be shown to the user
   private Animal instanceRandomAnimal() {
     int i = new Random().nextInt(10);
@@ -1345,6 +1357,7 @@ public class Zoo {
     }
     return chooseAni;
   }
+
   // Gives the appeal of an animal based on it's age, animal family, species and mutations
   private Double getAppealOfAnimal(Animal a) {
     switch (a.getClass().getSimpleName()) {
@@ -1381,7 +1394,8 @@ public class Zoo {
     }
     return Math.floor(totalAppeal * 100) / 100;
   }
-  // Showing an animal in the acquire animal menu, will create the animal with the caracteristics shown when the animal was being presented in the menu 
+
+  // Showing an animal in the acquire animal menu, will create the animal with the caracteristics shown when the animal was being presented in the menu
   private Animal createNewAnimal(
     String animalType,
     String artName,
@@ -1416,7 +1430,8 @@ public class Zoo {
         chooseAni = new Fox(artName, age, appeal, mutations, ageOfDeath);
         break;
       case "Firesalamandre":
-        chooseAni = new Firesalamandre(artName, age, appeal, mutations, ageOfDeath);
+        chooseAni =
+          new Firesalamandre(artName, age, appeal, mutations, ageOfDeath);
         break;
       case "Oxolotl":
         chooseAni = new Oxolotl(artName, age, appeal, mutations, ageOfDeath);
@@ -1438,11 +1453,10 @@ public class Zoo {
         loss += Rand.getRandomNumberInRange(200, 200 * 2); // food costs
         a = entry.getValue();
         a.setAge(4);
-        entry.setValue(a);
-        /*
-          TODO:
-          - Implement births and deaths
-        */
+        if (a.getAge() >= a.getAnimalsDeath()) {
+          inventory.remove(entry.getKey());
+          System.out.println(a.getName() + " has died.");
+        } else entry.setValue(a);
       }
     }
 
@@ -1455,29 +1469,45 @@ public class Zoo {
           loss += Rand.getRandomNumberInRange(100, 100 * 2); // cleaning costs
           Animal[] animals = s.getAnimalList();
           for (Animal a : animals) {
-            try{
+            try {
               a.setAge(4);
+              if (a.getAge() >= a.getAnimalsDeath()) {
+                for (int j = 0; j < animals.length; j++) {
+                  if (animals[i].getId() == a.getId()) animals[i] = null;
+                  System.out.println(a.getName() + " has died.");
+                  break;
+                }
+              }
               loss += Rand.getRandomNumberInRange(200, 200 * 2); // food costs
               profit += getAppealOfAnimal(a); // generates profit based on appeal which are based on the animal family, species, mutations and age
-            }
-            catch (NullPointerException e)
-            {
+            } catch (NullPointerException e) {
               //Não existem mais animais no settlement
             }
-            
-            /*
-            TODO:
-            - Implement births and deaths
-          */
           }
         }
       }
     }
     this.addBalance(profit - loss);
-    /*
-      TODO:
-      - Handle negative balance; possibly: in case of debt, animals will be sold if needed
-    */
+    if (profit - loss > 0) System.out.println(
+      "During the accounting period, the zoo profited " + (profit - loss) + "."
+    ); else System.out.println(
+      "During the accounting period, the zoo loss " + (profit - loss) + "."
+    );
+    // In case of debt, animals will be lost
+    while (getBalance() < 0) {
+      System.out.println(
+        "In order to deal with the current debt, it was necessary to sell animals."
+      );
+      // An animal will be sold for 1000 dollars until the balance is positive again
+      for (Map.Entry<Integer, Animal> entry : inventory.entrySet()) {
+        inventory.remove(entry.getKey());
+        addBalance(1000);
+        break;
+      }
+    }
+    System.out.println("Current balance: " + getBalance() + ".");
+    System.out.println("\nEnter any key to return to main menu:");
+    String any = in.nextLine();
   }
 
   // Trying to know what object class is being called so it can be instacenced to
