@@ -1442,6 +1442,7 @@ public class Zoo {
 
   private void displayInformationMenu() {}
 
+  // Each accounting period represents 4 months in time, profits and losses will be calculated and animal casualities too
   private void accountingPeriod() {
     // Each accounting period is equal to 4 months in time
     int profit = 0, loss = 0;
@@ -1510,6 +1511,7 @@ public class Zoo {
     String any = in.nextLine();
   }
 
+  // Creates a riot inside the zoo, there is a chance animals will run away from their settlements or from the zoo entirely
   private void jumanji() {
     if (!this.settlementList.isEmpty()) {
       Settlement s;
