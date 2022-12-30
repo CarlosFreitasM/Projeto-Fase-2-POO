@@ -1,3 +1,9 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.nio.channels.SelectableChannel;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,13 +13,6 @@ import java.util.Scanner;
 import java.util.TreeMap;
 import javax.lang.model.util.ElementScanner6;
 import javax.swing.WindowConstants;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 
 public class Zoo {
 
@@ -31,11 +30,9 @@ public class Zoo {
   Menu menu = new Menu();
 
   public Zoo() {
-
     this.balance = 20000;
     this.inventory = new TreeMap<Integer, Animal>();
     this.settlementList = new ArrayList<Settlement>();
-
   }
 
   // METHODS+
@@ -45,7 +42,6 @@ public class Zoo {
     BufferedReader fR = new BufferedReader(reader);
     String nameAnimal = fR.readLine();
     while (nameAnimal != null) {
-
       possibleAnimals.add(nameAnimal);
       possibleAnimals.get(0);
       System.out.println(nameAnimal);
@@ -56,27 +52,28 @@ public class Zoo {
 
   public void mainMenu() throws IOException {
     // Console.clear();
-    fileCheck();
+    // fileCheck();
     while (this.running) {
       System.out.println(
-          "------------MAIN-MENU------------\n" +
-              "| (1) Acquire new animal        |\n" + // -> submenu: random animal; random animal with a specific
-                                                      // genetic feature
-              "| (2) Build new settlement      |\n" +
-              "| (3) Place animal              |\n" +
-              "| (4) Chinese calendar          |\n" + // Boost chosen animal
-              "| (5) Show animals              |\n" + // -> submenu: all animals; filter animals by genetic feature or
-                                                      // mutation
-              "| (6) Show settlements          |\n" +
-              "| (7) Display zoo information   |\n" + // -> submenu: all information (current animals and their details,
-                                                      // habitats and their current animals, obituary, history);
-                                                      // obituary; history
-              "| (8) Accounting period         |\n" +
-              "| (9) Jumanji                   |\n" +
-              "|                               |\n" +
-              "| (0) Exit                      |\n" +
-              "---------------------------------\n\n" +
-              "Enter an option: ");
+        "------------MAIN-MENU------------\n" +
+        "| (1) Acquire new animal        |\n" + // -> submenu: random animal; random animal with a specific
+        // genetic feature
+        "| (2) Build new settlement      |\n" +
+        "| (3) Place animal              |\n" +
+        "| (4) Chinese calendar          |\n" + // Boost chosen animal
+        "| (5) Show animals              |\n" + // -> submenu: all animals; filter animals by genetic feature or
+        // mutation
+        "| (6) Show settlements          |\n" +
+        "| (7) Display zoo information   |\n" + // -> submenu: all information (current animals and their details,
+        // habitats and their current animals, obituary, history);
+        // obituary; history
+        "| (8) Accounting period         |\n" +
+        "| (9) Jumanji                   |\n" +
+        "|                               |\n" +
+        "| (0) Exit                      |\n" +
+        "---------------------------------\n\n" +
+        "Enter an option: "
+      );
 
       choice = in.nextLine();
       switch (choice) {
@@ -122,13 +119,14 @@ public class Zoo {
   private void acquireAnimalMenu() {
     // Console.clear();
     System.out.println(
-        "-------ACQUIRE-NEW-ANIMAL--------\n" +
-            "| (1) Randomly                  |\n" +
-            "| (2) Specify a genetic feature |\n" +
-            "|                               |\n" +
-            "| (0) Go back to main menu      |\n" +
-            "---------------------------------\n\n" +
-            "Enter an option: ");
+      "-------ACQUIRE-NEW-ANIMAL--------\n" +
+      "| (1) Randomly                  |\n" +
+      "| (2) Specify a genetic feature |\n" +
+      "|                               |\n" +
+      "| (0) Go back to main menu      |\n" +
+      "---------------------------------\n\n" +
+      "Enter an option: "
+    );
 
     choice = in.nextLine();
     switch (choice) {
@@ -177,48 +175,49 @@ public class Zoo {
     Animal animal3 = instanceRandomAnimal();
     // Console.clear();
     System.out.println(
-        "-------GET-RANDOM-ANIMAL------\n" +
-            "| Choose one of the animals. |\n" +
-            "|                            |\n" +
-            "| (1) Name: " +
-            animal1.getName() +
-            "| Espicies Name: " +
-            animal1.getClass().getSimpleName() +
-            " | Age: " +
-            animal1.getAge() +
-            " | Appeal: " +
-            getAppealOfAnimal(animal1) +
-            " | Mutations: " +
-            animal1.getMutations() +
-            " |\n" +
-            "----------------------------------\n\n" +
-            "|                            |\n" +
-            "| (2) Name: " +
-            animal2.getName() +
-            "| Espicies Name: " +
-            animal2.getClass().getSimpleName() +
-            " | Age: " +
-            animal2.getAge() +
-            " | Appeal: " +
-            getAppealOfAnimal(animal2) +
-            " | Mutations: " +
-            animal2.getMutations() +
-            " |\n" +
-            "----------------------------------\n\n" +
-            "|                            |\n" +
-            "| (3) Name: " +
-            animal3.getName() +
-            "| Espicies Name: " +
-            animal3.getClass().getSimpleName() +
-            " | Age: " +
-            animal3.getAge() +
-            " | Appeal: " +
-            getAppealOfAnimal(animal3) +
-            " | Mutations: " +
-            animal3.getMutations() +
-            " |\n" +
-            "----------------------------------\n\n" +
-            "Enter an option: ");
+      "-------GET-RANDOM-ANIMAL------\n" +
+      "| Choose one of the animals. |\n" +
+      "|                            |\n" +
+      "| (1) Name: " +
+      animal1.getName() +
+      "| Espicies Name: " +
+      animal1.getClass().getSimpleName() +
+      " | Age: " +
+      animal1.getAge() +
+      " | Appeal: " +
+      getAppealOfAnimal(animal1) +
+      " | Mutations: " +
+      animal1.getMutations() +
+      " |\n" +
+      "----------------------------------\n\n" +
+      "|                            |\n" +
+      "| (2) Name: " +
+      animal2.getName() +
+      "| Espicies Name: " +
+      animal2.getClass().getSimpleName() +
+      " | Age: " +
+      animal2.getAge() +
+      " | Appeal: " +
+      getAppealOfAnimal(animal2) +
+      " | Mutations: " +
+      animal2.getMutations() +
+      " |\n" +
+      "----------------------------------\n\n" +
+      "|                            |\n" +
+      "| (3) Name: " +
+      animal3.getName() +
+      "| Espicies Name: " +
+      animal3.getClass().getSimpleName() +
+      " | Age: " +
+      animal3.getAge() +
+      " | Appeal: " +
+      getAppealOfAnimal(animal3) +
+      " | Mutations: " +
+      animal3.getMutations() +
+      " |\n" +
+      "----------------------------------\n\n" +
+      "Enter an option: "
+    );
     choice = in.nextLine();
     System.out.println(choice);
     switch (choice) {
@@ -228,37 +227,41 @@ public class Zoo {
       case "1":
         Console.clear();
         Animal ani1 = createNewAnimal(
-            animal1.getClass().getSimpleName(),
-            animal1.getName(),
-            animal1.getAge(),
-            getAppealOfAnimal(animal1),
-            animal1.getMutations());
+          animal1.getClass().getSimpleName(),
+          animal1.getName(),
+          animal1.getAge(),
+          getAppealOfAnimal(animal1),
+          animal1.getMutations()
+        );
         addAnimal(ani1);
         System.out.println(choice);
         break;
       case "2":
         Animal ani2 = createNewAnimal(
-            animal2.getClass().getSimpleName(),
-            animal2.getName(),
-            animal2.getAge(),
-            getAppealOfAnimal(animal2),
-            animal2.getMutations());
+          animal2.getClass().getSimpleName(),
+          animal2.getName(),
+          animal2.getAge(),
+          getAppealOfAnimal(animal2),
+          animal2.getMutations()
+        );
         addAnimal(ani2);
         System.out.println("GENETIC FEATURE");
         break;
       case "3":
         Animal ani3 = createNewAnimal(
-            animal3.getClass().getSimpleName(),
-            animal3.getName(),
-            animal3.getAge(),
-            getAppealOfAnimal(animal3),
-            animal3.getMutations());
+          animal3.getClass().getSimpleName(),
+          animal3.getName(),
+          animal3.getAge(),
+          getAppealOfAnimal(animal3),
+          animal3.getMutations()
+        );
         addAnimal(ani3);
         System.out.println("GENETIC CHAR");
         break;
       default:
         System.out.println(
-            "Please enter a valid option which animal to choose.");
+          "Please enter a valid option which animal to choose."
+        );
     }
   }
 
@@ -268,48 +271,49 @@ public class Zoo {
     Animal animal3 = an.get(2);
     // Console.clear();
     System.out.println(
-        "-------GET-RANDOM-ANIMAL------\n" +
-            "| Choose one of the animals. |\n" +
-            "|                            |\n" +
-            "| (1) Name: " +
-            animal1.getName() +
-            "| Espicies Name: " +
-            animal1.getClass().getSimpleName() +
-            " | Age: " +
-            animal1.getAge() +
-            " | Appeal: " +
-            getAppealOfAnimal(animal1) +
-            " | Mutations: " +
-            animal1.getMutations() +
-            " |\n" +
-            "----------------------------------\n\n" +
-            "|                            |\n" +
-            "| (2) Name: " +
-            animal2.getName() +
-            "| Espicies Name: " +
-            animal2.getClass().getSimpleName() +
-            " | Age: " +
-            animal2.getAge() +
-            " | Appeal: " +
-            getAppealOfAnimal(animal2) +
-            " | Mutations: " +
-            animal2.getMutations() +
-            " |\n" +
-            "----------------------------------\n\n" +
-            "|                            |\n" +
-            "| (3) Name: " +
-            animal3.getName() +
-            "| Espicies Name: " +
-            animal3.getClass().getSimpleName() +
-            " | Age: " +
-            animal3.getAge() +
-            " | Appeal: " +
-            getAppealOfAnimal(animal3) +
-            " | Mutations: " +
-            animal3.getMutations() +
-            " |\n" +
-            "----------------------------------\n\n" +
-            "Enter an option: ");
+      "-------GET-RANDOM-ANIMAL------\n" +
+      "| Choose one of the animals. |\n" +
+      "|                            |\n" +
+      "| (1) Name: " +
+      animal1.getName() +
+      "| Espicies Name: " +
+      animal1.getClass().getSimpleName() +
+      " | Age: " +
+      animal1.getAge() +
+      " | Appeal: " +
+      getAppealOfAnimal(animal1) +
+      " | Mutations: " +
+      animal1.getMutations() +
+      " |\n" +
+      "----------------------------------\n\n" +
+      "|                            |\n" +
+      "| (2) Name: " +
+      animal2.getName() +
+      "| Espicies Name: " +
+      animal2.getClass().getSimpleName() +
+      " | Age: " +
+      animal2.getAge() +
+      " | Appeal: " +
+      getAppealOfAnimal(animal2) +
+      " | Mutations: " +
+      animal2.getMutations() +
+      " |\n" +
+      "----------------------------------\n\n" +
+      "|                            |\n" +
+      "| (3) Name: " +
+      animal3.getName() +
+      "| Espicies Name: " +
+      animal3.getClass().getSimpleName() +
+      " | Age: " +
+      animal3.getAge() +
+      " | Appeal: " +
+      getAppealOfAnimal(animal3) +
+      " | Mutations: " +
+      animal3.getMutations() +
+      " |\n" +
+      "----------------------------------\n\n" +
+      "Enter an option: "
+    );
     choice = in.nextLine();
     System.out.println(choice);
     switch (choice) {
@@ -319,37 +323,41 @@ public class Zoo {
       case "1":
         Console.clear();
         Animal ani1 = createNewAnimal(
-            animal1.getClass().getSimpleName(),
-            animal1.getName(),
-            animal1.getAge(),
-            getAppealOfAnimal(animal1),
-            animal1.getMutations());
+          animal1.getClass().getSimpleName(),
+          animal1.getName(),
+          animal1.getAge(),
+          getAppealOfAnimal(animal1),
+          animal1.getMutations()
+        );
         addAnimal(ani1);
         System.out.println(choice);
         break;
       case "2":
         Animal ani2 = createNewAnimal(
-            animal2.getClass().getSimpleName(),
-            animal2.getName(),
-            animal2.getAge(),
-            getAppealOfAnimal(animal2),
-            animal2.getMutations());
+          animal2.getClass().getSimpleName(),
+          animal2.getName(),
+          animal2.getAge(),
+          getAppealOfAnimal(animal2),
+          animal2.getMutations()
+        );
         addAnimal(ani2);
         System.out.println("GENETIC FEATURE");
         break;
       case "3":
         Animal ani3 = createNewAnimal(
-            animal3.getClass().getSimpleName(),
-            animal3.getName(),
-            animal3.getAge(),
-            getAppealOfAnimal(animal3),
-            animal3.getMutations());
+          animal3.getClass().getSimpleName(),
+          animal3.getName(),
+          animal3.getAge(),
+          getAppealOfAnimal(animal3),
+          animal3.getMutations()
+        );
         addAnimal(ani3);
         System.out.println("GENETIC CHAR");
         break;
       default:
         System.out.println(
-            "Please enter a valid option which animal to choose.");
+          "Please enter a valid option which animal to choose."
+        );
     }
   }
 
@@ -360,31 +368,32 @@ public class Zoo {
 
     Console.clear();
     System.out.println(
-        "-------BUILD-NEW-SETTLEMENT-------\n" +
-            "| Balance: " +
-            this.balance +
-            " euros            |\n" +
-            "|                                |\n" +
-            "| Choose one of the proposals.   |\n" +
-            "| (1) Capacity: " +
-            proposal1.getCapacity() +
-            " | Price: " +
-            proposal1.getPrice() +
-            " |\n" +
-            "| (2) Capacity: " +
-            proposal2.getCapacity() +
-            " | Price: " +
-            proposal2.getPrice() +
-            " |\n" +
-            "| (3) Capacity: " +
-            proposal3.getCapacity() +
-            " | Price: " +
-            proposal3.getPrice() +
-            " |\n" +
-            "|                                |\n" +
-            "| (0) Go back to main menu       |\n" +
-            "----------------------------------\n\n" +
-            "Enter an option: ");
+      "-------BUILD-NEW-SETTLEMENT-------\n" +
+      "| Balance: " +
+      this.balance +
+      " euros            |\n" +
+      "|                                |\n" +
+      "| Choose one of the proposals.   |\n" +
+      "| (1) Capacity: " +
+      proposal1.getCapacity() +
+      " | Price: " +
+      proposal1.getPrice() +
+      " |\n" +
+      "| (2) Capacity: " +
+      proposal2.getCapacity() +
+      " | Price: " +
+      proposal2.getPrice() +
+      " |\n" +
+      "| (3) Capacity: " +
+      proposal3.getCapacity() +
+      " | Price: " +
+      proposal3.getPrice() +
+      " |\n" +
+      "|                                |\n" +
+      "| (0) Go back to main menu       |\n" +
+      "----------------------------------\n\n" +
+      "Enter an option: "
+    );
 
     String y = in.nextLine();
     switch (y) {
@@ -393,18 +402,15 @@ public class Zoo {
         return;
       case "1":
         Console.clear();
-        if (buy(proposal1.getPrice()))
-          settlementList.add(proposal1);
+        if (buy(proposal1.getPrice())) settlementList.add(proposal1);
         break;
       case "2":
         Console.clear();
-        if (buy(proposal2.getPrice()))
-          settlementList.add(proposal2);
+        if (buy(proposal2.getPrice())) settlementList.add(proposal2);
         break;
       case "3":
         Console.clear();
-        if (buy(proposal3.getPrice()))
-          settlementList.add(proposal3);
+        if (buy(proposal3.getPrice())) settlementList.add(proposal3);
         break;
       default:
         System.out.println("Please enter a valid option.");
@@ -416,31 +422,35 @@ public class Zoo {
 
     if (inventory.isEmpty()) {
       System.out.println(
-          "There are no animals in the inventory.\n\nEnter any key to return to main menu:");
+        "There are no animals in the inventory.\n\nEnter any key to return to main menu:"
+      );
       String any = in.nextLine();
       return;
     }
 
     System.out.println(
-        "--------PLACE-ANIMAL--------<\n" +
-            "|\n" +
-            "| Select an animal to place.\n" +
-            "| Showing id, name and appeal.\n" +
-            "|");
+      "--------PLACE-ANIMAL--------<\n" +
+      "|\n" +
+      "| Select an animal to place.\n" +
+      "| Showing id, name and appeal.\n" +
+      "|"
+    );
     for (Map.Entry<Integer, Animal> entry : inventory.entrySet()) { // PRINTS ANIMAL INVENTORY
       System.out.println(
-          "| (" +
-              entry.getKey() +
-              ") " +
-              entry.getValue().getName() +
-              ", " +
-              entry.getValue().getAppeal());
+        "| (" +
+        entry.getKey() +
+        ") " +
+        entry.getValue().getName() +
+        ", " +
+        entry.getValue().getAppeal()
+      );
     }
     System.out.println(
-        "|\n" +
-            "| (X) Return to main menu.       \n" +
-            "--------------------------<\n\n" +
-            "Enter an option: ");
+      "|\n" +
+      "| (X) Return to main menu.       \n" +
+      "--------------------------<\n\n" +
+      "Enter an option: "
+    );
 
     String y = in.nextLine();
     int animalId;
@@ -456,32 +466,36 @@ public class Zoo {
           if (settlementList.isEmpty()) {
             Console.clear();
             System.out.println(
-                "There are no settlements built." +
-                    "\nEnter any key to return to main menu:");
+              "There are no settlements built." +
+              "\nEnter any key to return to main menu:"
+            );
             String any = in.nextLine();
             return;
           }
           Console.clear();
           System.out.println(
-              "-------PLACE-ANIMAL------<\n" +
-                  "|                       \n" +
-                  "| Select a settlement:");
+            "-------PLACE-ANIMAL------<\n" +
+            "|                       \n" +
+            "| Select a settlement:"
+          );
           // Print settlements
           for (int i = 0; i < settlementList.size(); i++) {
             settlement = settlementList.get(i);
             System.out.println(
-                "| (" +
-                    i +
-                    ") Housing space: " +
-                    settlement.getAnimalCount() +
-                    "/" +
-                    settlement.getCapacity());
+              "| (" +
+              i +
+              ") Housing space: " +
+              settlement.getAnimalCount() +
+              "/" +
+              settlement.getCapacity()
+            );
           }
           System.out.println(
-              "|\n" +
-                  "| (X) Return to main menu.       \n" +
-                  "--------------------------<\n" +
-                  "Enter an option:\n");
+            "|\n" +
+            "| (X) Return to main menu.       \n" +
+            "--------------------------<\n" +
+            "Enter an option:\n"
+          );
           String z = in.nextLine();
           int settlementId;
 
@@ -498,30 +512,33 @@ public class Zoo {
                 if (stl.getAnimalCount() == stl.getCapacity()) {
                   // SETTLEMENT IS FULL; MUST REPLACE AN ANIMAL
                   ArrayList<Animal> animals = settlementList
-                      .get(settlementId)
-                      .getAnimals();
+                    .get(settlementId)
+                    .getAnimals();
 
                   System.out.println(
-                      "-------PLACE-ANIMAL-----------<\n" +
-                          "|\n" +
-                          "| Select animal to replace:\n" +
-                          "| Showing id, name and appeal.\n" +
-                          "|");
+                    "-------PLACE-ANIMAL-----------<\n" +
+                    "|\n" +
+                    "| Select animal to replace:\n" +
+                    "| Showing id, name and appeal.\n" +
+                    "|"
+                  );
                   // PRINTS ANIMALS
                   for (int q = 0; q < animals.size(); q++) {
                     Animal ani = animals.get(q);
                     System.out.println(
-                        "| (" +
-                            ani.getId() +
-                            ") " +
-                            ani.getName() +
-                            ", " +
-                            ani.getAppeal());
+                      "| (" +
+                      ani.getId() +
+                      ") " +
+                      ani.getName() +
+                      ", " +
+                      ani.getAppeal()
+                    );
                   }
                   System.out.println(
-                      "\n| (X) Return to main menu." +
-                          "|\n----------------<\n" +
-                          "Enter an option:\n");
+                    "\n| (X) Return to main menu." +
+                    "|\n----------------<\n" +
+                    "Enter an option:\n"
+                  );
                   String w = in.nextLine();
                   int animalToReplaceId;
                   switch (w) {
@@ -538,14 +555,15 @@ public class Zoo {
                             Animal inventoryAnimal = inventory.get(animalId); // Gets animal from inventory
                             Animal settlementAnimal = newAnimalList[j]; // Gets animal from settlement
                             inventory.replace(animalId, settlementAnimal); // Places previous settlement animal in
-                                                                           // inventory
+                            // inventory
                             newAnimalList[j] = inventoryAnimal; // Places previous inventory animal in settlement
                             stl.setAnimalList(newAnimalList); // Sets the new animal list
                             settlementList.set(settlementId, stl); // Updates settlement
                             Console.clear();
                             System.out.println(
-                                "Animal successfully placed.\n" +
-                                    "\nEnter any key to return to main menu:");
+                              "Animal successfully placed.\n" +
+                              "\nEnter any key to return to main menu:"
+                            );
                             String any = in.nextLine();
                           }
                         }
@@ -561,19 +579,18 @@ public class Zoo {
                       stl.getAnimalList()[p] = a; // Places animal
                       Console.clear();
                       System.out.println(
-                          "Animal successfully placed.\n" +
-                              "\nEnter any key to return to main menu:");
+                        "Animal successfully placed.\n" +
+                        "\nEnter any key to return to main menu:"
+                      );
                       String any = in.nextLine();
                       break; // Jumps out of the loop
                     }
                   }
                   settlementList.set(settlementId, stl); // Updates settlement
                 }
-              } else
-                System.out.println("Please enter a valid option.");
+              } else System.out.println("Please enter a valid option.");
           }
-        } else
-          System.out.println("Please enter a valid option.");
+        } else System.out.println("Please enter a valid option.");
     }
   }
 
@@ -590,16 +607,17 @@ public class Zoo {
   private void showAnimalsMenu() {
     Console.clear();
     System.out.println(
-        "-----------SHOW-ANIMALS----------\n" +
-            "| (1) All                       |\n" +
-            "|     Filter by:                |\n" +
-            "| (2) Genetic feature           |\n" +
-            "| (3) Mutation                  |\n" +
-            "| (4) Animal by ID              |\n" +
-            "|                               |\n" +
-            "| (0) Go back to main menu      |\n" +
-            "---------------------------------\n\n" +
-            "Enter an option: ");
+      "-----------SHOW-ANIMALS----------\n" +
+      "| (1) All                       |\n" +
+      "|     Filter by:                |\n" +
+      "| (2) Genetic feature           |\n" +
+      "| (3) Mutation                  |\n" +
+      "| (4) Animal by ID              |\n" +
+      "|                               |\n" +
+      "| (0) Go back to main menu      |\n" +
+      "---------------------------------\n\n" +
+      "Enter an option: "
+    );
 
     choice = in.nextLine();
     switch (choice) {
@@ -641,82 +659,84 @@ public class Zoo {
     Console.clear();
     if (settlementList.isEmpty()) {
       System.out.println(
-          "There are no settlements built.\n\nEnter any key to return to main menu:");
+        "There are no settlements built.\n\nEnter any key to return to main menu:"
+      );
       String any = in.nextLine();
       return;
     }
 
     Settlement settlement;
     System.out.println(
-        "----------SETTLEMENTS----------<\n" +
-            "|\n| Showing name, appeal and age.\n|");
+      "----------SETTLEMENTS----------<\n" +
+      "|\n| Showing name, appeal and age.\n|"
+    );
     for (int i = 0; i < settlementList.size(); i++) {
       settlement = settlementList.get(i);
 
       System.out.println(
-          "| Occupation: " +
-              settlement.getAnimalCount() +
-              "/" +
-              settlement.getCapacity() +
-              "\n| Current animals:");
+        "| Occupation: " +
+        settlement.getAnimalCount() +
+        "/" +
+        settlement.getCapacity() +
+        "\n| Current animals:"
+      );
       ArrayList<Animal> settlementAnimals = settlement.getAnimals();
-      if (settlementAnimals.isEmpty())
-        System.out.println("| None");
+      if (settlementAnimals.isEmpty()) System.out.println("| None");
       for (int j = 0; j < settlementAnimals.size(); j++) {
         Animal a = settlementAnimals.get(j);
         System.out.println(
-            "| " + a.getName() + ", " + a.getAppeal() + ", " + a.getAge());
+          "| " + a.getName() + ", " + a.getAppeal() + ", " + a.getAge()
+        );
       }
       System.out.println("|");
     }
     System.out.println(
-        "--------------------<\n" + "\nEnter any key to return to main menu:");
+      "--------------------<\n" + "\nEnter any key to return to main menu:"
+    );
     String any = in.nextLine();
   }
 
-  /*
-   * private TreeMap<Integer, Animal> showAllAnimals() {
-   * return inventory;
-   * }
-   */
-
   private void showAllAnimals() {
     System.out.println(
-        "-----------INVENTORY----------<\n" +
-            "| Showing id, name and appeal.\n" +
-            "|");
+      "-----------INVENTORY----------<\n" +
+      "| Showing id, name and appeal.\n" +
+      "|"
+    );
     for (Map.Entry<Integer, Animal> entry : inventory.entrySet()) { // PRINTS ANIMAL INVENTORY
       System.out.println(
-          "| (" +
-              entry.getKey() +
-              ") " +
-              entry.getValue().getName() +
-              ", " +
-              entry.getValue().getAppeal());
+        "| (" +
+        entry.getKey() +
+        ") " +
+        entry.getValue().getName() +
+        ", " +
+        entry.getValue().getAppeal()
+      );
     }
     System.out.println(
-        "| \n" +
-            "------------------------------<\n\n" +
-            "Enter any key to return to main menu:");
+      "| \n" +
+      "------------------------------<\n\n" +
+      "Enter any key to return to main menu:"
+    );
     String any = in.nextLine();
     Console.clear();
   }
 
   private void showByGenetics() throws ClassNotFoundException {
     System.out.println(
-        "-------CHOOSE-ANIMAL-GENETIC------\n" +
-            "Choose the genetics you want     |\n" +
-            "|(1)Panthera                     |\n" +
-            "|(2)Acynonyx                     |\n" +
-            "|(3)Puma                         |\n" +
-            "|(4)Canis                        |\n" +
-            "|(5)Vulpes                       |\n" +
-            "|(6)Salamandra                   |\n" +
-            "|(7)Ambystoma                    |\n" +
-            "|                                |\n" +
-            "| (0) Go back to main menu       |\n" +
-            "----------------------------------\n\n" +
-            "Enter an option: ");
+      "-------CHOOSE-ANIMAL-GENETIC------\n" +
+      "Choose the genetics you want     |\n" +
+      "|(1)Panthera                     |\n" +
+      "|(2)Acynonyx                     |\n" +
+      "|(3)Puma                         |\n" +
+      "|(4)Canis                        |\n" +
+      "|(5)Vulpes                       |\n" +
+      "|(6)Salamandra                   |\n" +
+      "|(7)Ambystoma                    |\n" +
+      "|                                |\n" +
+      "| (0) Go back to main menu       |\n" +
+      "----------------------------------\n\n" +
+      "Enter an option: "
+    );
     int o = 0;
     int j = 0;
     String y = in.nextLine();
@@ -725,195 +745,190 @@ public class Zoo {
         return;
       case "1":
         System.out.println(
-            "-----------INVENTORY----------<\n" +
-                "| Showing id, name, appeal and species name.\n" +
-                "|");
+          "-----------INVENTORY----------<\n" +
+          "| Showing id, name, appeal and species name.\n" +
+          "|"
+        );
         for (Map.Entry<Integer, Animal> entry : inventory.entrySet()) {
-
           Class c = Class.forName(entry.getValue().getClass().getSimpleName());
 
           if (c.getInterfaces()[0] == Pantherae.class) {
             System.out.println(
-                "| (" +
-                    entry.getKey() +
-                    ") " +
-                    entry.getValue().getName() +
-                    ", " +
-                    entry.getValue().getAppeal() +
-                    ", " +
-                    entry.getValue().getClass().getSimpleName());
-
+              "| (" +
+              entry.getKey() +
+              ") " +
+              entry.getValue().getName() +
+              ", " +
+              entry.getValue().getAppeal() +
+              ", " +
+              entry.getValue().getClass().getSimpleName()
+            );
           }
-
         }
         break;
       case "2":
         System.out.println(
-            "-----------INVENTORY----------<\n" +
-                "| Showing id, name, appeal and species name.\n" +
-                "|");
+          "-----------INVENTORY----------<\n" +
+          "| Showing id, name, appeal and species name.\n" +
+          "|"
+        );
         for (Map.Entry<Integer, Animal> entry : inventory.entrySet()) {
-
           Class c = Class.forName(entry.getValue().getClass().getSimpleName());
 
           if (c.getInterfaces()[0] == Acynonyx.class) {
             System.out.println(
-                "| (" +
-                    entry.getKey() +
-                    ") " +
-                    entry.getValue().getName() +
-                    ", " +
-                    entry.getValue().getAppeal() +
-                    ", " +
-                    entry.getValue().getClass().getSimpleName());
-
+              "| (" +
+              entry.getKey() +
+              ") " +
+              entry.getValue().getName() +
+              ", " +
+              entry.getValue().getAppeal() +
+              ", " +
+              entry.getValue().getClass().getSimpleName()
+            );
           }
-
         }
         break;
       case "3":
         System.out.println(
-            "-----------INVENTORY----------<\n" +
-                "| Showing id, name, appeal and species name.\n" +
-                "|");
+          "-----------INVENTORY----------<\n" +
+          "| Showing id, name, appeal and species name.\n" +
+          "|"
+        );
         for (Map.Entry<Integer, Animal> entry : inventory.entrySet()) {
-
           Class c = Class.forName(entry.getValue().getClass().getSimpleName());
 
           if (c.getInterfaces()[0] == Puma.class) {
             System.out.println(
-                "| (" +
-                    entry.getKey() +
-                    ") " +
-                    entry.getValue().getName() +
-                    ", " +
-                    entry.getValue().getAppeal() +
-                    ", " +
-                    entry.getValue().getClass().getSimpleName());
-
+              "| (" +
+              entry.getKey() +
+              ") " +
+              entry.getValue().getName() +
+              ", " +
+              entry.getValue().getAppeal() +
+              ", " +
+              entry.getValue().getClass().getSimpleName()
+            );
           }
-
         }
         break;
       case "4":
         System.out.println(
-            "-----------INVENTORY----------<\n" +
-                "| Showing id, name, appeal and species name.\n" +
-                "|");
+          "-----------INVENTORY----------<\n" +
+          "| Showing id, name, appeal and species name.\n" +
+          "|"
+        );
         for (Map.Entry<Integer, Animal> entry : inventory.entrySet()) {
-
           Class c = Class.forName(entry.getValue().getClass().getSimpleName());
 
           if (c.getInterfaces()[0] == Canis.class) {
             System.out.println(
-                "| (" +
-                    entry.getKey() +
-                    ") " +
-                    entry.getValue().getName() +
-                    ", " +
-                    entry.getValue().getAppeal() +
-                    ", " +
-                    entry.getValue().getClass().getSimpleName());
-
+              "| (" +
+              entry.getKey() +
+              ") " +
+              entry.getValue().getName() +
+              ", " +
+              entry.getValue().getAppeal() +
+              ", " +
+              entry.getValue().getClass().getSimpleName()
+            );
           }
-
         }
         break;
       case "5":
         System.out.println(
-            "-----------INVENTORY----------<\n" +
-                "| Showing id, name, appeal and species name.\n" +
-                "|");
+          "-----------INVENTORY----------<\n" +
+          "| Showing id, name, appeal and species name.\n" +
+          "|"
+        );
         for (Map.Entry<Integer, Animal> entry : inventory.entrySet()) {
-
           Class c = Class.forName(entry.getValue().getClass().getSimpleName());
 
           if (c.getInterfaces()[0] == Vulpes.class) {
             System.out.println(
-                "| (" +
-                    entry.getKey() +
-                    ") " +
-                    entry.getValue().getName() +
-                    ", " +
-                    entry.getValue().getAppeal() +
-                    ", " +
-                    entry.getValue().getClass().getSimpleName());
-
+              "| (" +
+              entry.getKey() +
+              ") " +
+              entry.getValue().getName() +
+              ", " +
+              entry.getValue().getAppeal() +
+              ", " +
+              entry.getValue().getClass().getSimpleName()
+            );
           }
-
         }
         break;
       case "6":
         System.out.println(
-            "-----------INVENTORY----------<\n" +
-                "| Showing id, name, appeal and species name.\n" +
-                "|");
+          "-----------INVENTORY----------<\n" +
+          "| Showing id, name, appeal and species name.\n" +
+          "|"
+        );
         for (Map.Entry<Integer, Animal> entry : inventory.entrySet()) {
-
           Class c = Class.forName(entry.getValue().getClass().getSimpleName());
 
           if (c.getInterfaces()[0] == Salamandre.class) {
             System.out.println(
-                "| (" +
-                    entry.getKey() +
-                    ") " +
-                    entry.getValue().getName() +
-                    ", " +
-                    entry.getValue().getAppeal() +
-                    ", " +
-                    entry.getValue().getClass().getSimpleName());
-
+              "| (" +
+              entry.getKey() +
+              ") " +
+              entry.getValue().getName() +
+              ", " +
+              entry.getValue().getAppeal() +
+              ", " +
+              entry.getValue().getClass().getSimpleName()
+            );
           }
-
         }
         break;
       case "7":
         System.out.println(
-            "-----------INVENTORY----------<\n" +
-                "| Showing id, name, appeal and species name.\n" +
-                "|");
+          "-----------INVENTORY----------<\n" +
+          "| Showing id, name, appeal and species name.\n" +
+          "|"
+        );
         for (Map.Entry<Integer, Animal> entry : inventory.entrySet()) {
-
           Class c = Class.forName(entry.getValue().getClass().getSimpleName());
 
           if (c.getInterfaces()[0] == Ambystoma.class) {
             System.out.println(
-                "| (" +
-                    entry.getKey() +
-                    ") " +
-                    entry.getValue().getName() +
-                    ", " +
-                    entry.getValue().getAppeal() +
-                    ", " +
-                    entry.getValue().getClass().getSimpleName());
-
+              "| (" +
+              entry.getKey() +
+              ") " +
+              entry.getValue().getName() +
+              ", " +
+              entry.getValue().getAppeal() +
+              ", " +
+              entry.getValue().getClass().getSimpleName()
+            );
           }
-
         }
         break;
       default:
         System.out.println("Please enter a valid Genetic option.");
     }
     System.out.println(
-        "| \n" +
-            "------------------------------<\n\n" +
-            "Enter any key to return to main menu:");
+      "| \n" +
+      "------------------------------<\n\n" +
+      "Enter any key to return to main menu:"
+    );
     String any = in.nextLine();
     Console.clear();
   }
 
   private void showByMutations() {
     System.out.println(
-        "--------CHOOSE-ANIMAL-MUTATIONS-------\n" +
-            "Choose the mutations you want    |\n" +
-            "|(1)Albinism                     |\n" +
-            "|(2)Leucism                      |\n" +
-            "|(3)Melanism                     |\n" +
-            "|(4)Heterochromia                |\n" +
-            "|                                |\n" +
-            "| (0) Go back to main menu       |\n" +
-            "----------------------------------\n\n" +
-            "Enter an option: ");
+      "--------CHOOSE-ANIMAL-MUTATIONS-------\n" +
+      "Choose the mutations you want    |\n" +
+      "|(1)Albinism                     |\n" +
+      "|(2)Leucism                      |\n" +
+      "|(3)Melanism                     |\n" +
+      "|(4)Heterochromia                |\n" +
+      "|                                |\n" +
+      "| (0) Go back to main menu       |\n" +
+      "----------------------------------\n\n" +
+      "Enter an option: "
+    );
 
     String y = in.nextLine();
     switch (y) {
@@ -921,93 +936,98 @@ public class Zoo {
         return;
       case "1":
         System.out.println(
-            "-----------INVENTORY----------<\n" +
-                "| Showing id, name, appeal and list of mutations.\n" +
-                "|");
+          "-----------INVENTORY----------<\n" +
+          "| Showing id, name, appeal and list of mutations.\n" +
+          "|"
+        );
         for (Map.Entry<Integer, Animal> entry : inventory.entrySet()) {
           if (entry.getValue().getMutations().contains("Leucism")) {
             System.out.println(
-                "| (" +
-                    entry.getKey() +
-                    ") " +
-                    entry.getValue().getName() +
-                    ", " +
-                    entry.getValue().getAppeal() +
-                    ", " +
-                    entry.getValue().getMutations());
+              "| (" +
+              entry.getKey() +
+              ") " +
+              entry.getValue().getName() +
+              ", " +
+              entry.getValue().getAppeal() +
+              ", " +
+              entry.getValue().getMutations()
+            );
           }
-
         }
         break;
       case "2":
         System.out.println(
-            "-----------INVENTORY----------<\n" +
-                "| Showing id, name, appeal and list of mutations.\n" +
-                "|");
+          "-----------INVENTORY----------<\n" +
+          "| Showing id, name, appeal and list of mutations.\n" +
+          "|"
+        );
         for (Map.Entry<Integer, Animal> entry : inventory.entrySet()) {
           if (entry.getValue().getMutations().contains("Albinism")) {
             System.out.println(
-                "| (" +
-                    entry.getKey() +
-                    ") " +
-                    entry.getValue().getName() +
-                    ", " +
-                    entry.getValue().getAppeal() +
-                    ", " +
-                    entry.getValue().getMutations());
+              "| (" +
+              entry.getKey() +
+              ") " +
+              entry.getValue().getName() +
+              ", " +
+              entry.getValue().getAppeal() +
+              ", " +
+              entry.getValue().getMutations()
+            );
           }
-
         }
 
         break;
       case "3":
         System.out.println(
-            "-----------INVENTORY----------<\n" +
-                "| Showing id, name, appeal and list of mutations.\n" +
-                "|");
+          "-----------INVENTORY----------<\n" +
+          "| Showing id, name, appeal and list of mutations.\n" +
+          "|"
+        );
         for (Map.Entry<Integer, Animal> entry : inventory.entrySet()) {
           if (entry.getValue().getMutations().contains("Melanism")) {
             System.out.println(
-                "| (" +
-                    entry.getKey() +
-                    ") " +
-                    entry.getValue().getName() +
-                    ", " +
-                    entry.getValue().getAppeal() +
-                    ", " +
-                    entry.getValue().getMutations());
+              "| (" +
+              entry.getKey() +
+              ") " +
+              entry.getValue().getName() +
+              ", " +
+              entry.getValue().getAppeal() +
+              ", " +
+              entry.getValue().getMutations()
+            );
           }
-
         }
 
         break;
       case "4":
         System.out.println(
-            "-----------INVENTORY----------<\n" +
-                "| Showing id, name, appeal and list of mutations.\n" +
-                "|");
+          "-----------INVENTORY----------<\n" +
+          "| Showing id, name, appeal and list of mutations.\n" +
+          "|"
+        );
         for (Map.Entry<Integer, Animal> entry : inventory.entrySet()) {
           if (entry.getValue().getMutations().contains("Heterochromia")) {
             System.out.println(
-                "| (" +
-                    entry.getKey() +
-                    ") " +
-                    entry.getValue().getName() +
-                    ", " +
-                    entry.getValue().getAppeal() +
-                    ", " +
-                    entry.getValue().getMutations());
+              "| (" +
+              entry.getKey() +
+              ") " +
+              entry.getValue().getName() +
+              ", " +
+              entry.getValue().getAppeal() +
+              ", " +
+              entry.getValue().getMutations()
+            );
           }
-
         }
         break;
       default:
         System.out.println("Please enter a valid Mutation option.");
     }
     System.out.println(
-        "| \n" +
-            "------------------------------<\n\n" +
-            "Enter any key to return to main menu:");
+      "| \n" +
+      "------------------------------<\n\n" +
+      "Enter any key to return to main menu:"
+    );
     String any = in.nextLine();
     Console.clear();
   }
@@ -1021,29 +1041,29 @@ public class Zoo {
     }
   }
 
-  private void showGenetic() throws ClassNotFoundException, InstantiationException, IllegalAccessException,
-      IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
+  private void showGenetic()
+    throws ClassNotFoundException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
     System.out.println(
-        "-------CHOOSE-ANIMAL-GENETIC------\n" +
-            "Choose the genetics you want     |\n" +
-            "|(1)Panthera                     |\n" +
-            "|(2)Acynonyx                     |\n" +
-            "|(3)Puma                         |\n" +
-            "|(4)Canis                        |\n" +
-            "|(5)Vulpes                       |\n" +
-            "|(6)Salamandra                   |\n" +
-            "|(7)Ambystoma                    |\n" +
-            "|                                |\n" +
-            "| (0) Go back to main menu       |\n" +
-            "----------------------------------\n\n" +
-            "Enter an option: ");
+      "-------CHOOSE-ANIMAL-GENETIC------\n" +
+      "Choose the genetics you want     |\n" +
+      "|(1)Panthera                     |\n" +
+      "|(2)Acynonyx                     |\n" +
+      "|(3)Puma                         |\n" +
+      "|(4)Canis                        |\n" +
+      "|(5)Vulpes                       |\n" +
+      "|(6)Salamandra                   |\n" +
+      "|(7)Ambystoma                    |\n" +
+      "|                                |\n" +
+      "| (0) Go back to main menu       |\n" +
+      "----------------------------------\n\n" +
+      "Enter an option: "
+    );
     int o = 0;
     int j = 0;
     String y = in.nextLine();
     Class c;
     animalsOfSpecific = new ArrayList<Animal>();
     switch (y) {
-
       case "0":
         return;
       case "1":
@@ -1276,9 +1296,7 @@ public class Zoo {
     }
   }
 
-  private void findClassesWithInterface() {
-
-  }
+  private void findClassesWithInterface() {}
 
   private void addAnimal(Animal a) {
     inventory.put(a.getId(), a);
@@ -1358,11 +1376,12 @@ public class Zoo {
   }
 
   private Animal createNewAnimal(
-      String animalType,
-      String artName,
-      int age,
-      Double appeal,
-      ArrayList<String> mutations) {
+    String animalType,
+    String artName,
+    int age,
+    Double appeal,
+    ArrayList<String> mutations
+  ) {
     switch (animalType) {
       case "Lion":
         chooseAni = new Lion(artName, age, appeal, mutations);
@@ -1398,22 +1417,60 @@ public class Zoo {
     return chooseAni;
   }
 
-  private void displayInformationMenu() {
-  }
+  private void displayInformationMenu() {}
 
   private void accountingPeriod() {
     // Each accounting period is equal to 4 months in time
+    double loss = 0;
 
-    // Update stored animals
-    // inventory.forEach(animal -> animal.setAge(4));
-    // Update active animals
+    if (!inventory.isEmpty()) {
+      Animal a;
+      loss += Rand.getRandomNumberInRange(50, 50 + 10); // inventory maintenance costs
+      for (Map.Entry<Integer, Animal> entry : inventory.entrySet()) {
+        loss += Rand.getRandomNumberInRange(200, 200 * 2); // food costs
+        a = entry.getValue();
+        a.setAge(4);
+        entry.setValue(a);
+        /*
+          TODO:
+          - Implement births and deaths
+        */
+      }
+    }
+
+    if (!this.settlementList.isEmpty()) {
+      Settlement s;
+      double profit = 0;
+      for (int i = 0; i < this.settlementList.size(); i++) {
+        s = settlementList.get(i);
+        if (s.getAnimalCount() > 0) {
+          loss += 740; // settlement staff guy's salary
+          loss += Rand.getRandomNumberInRange(100, 100 * 2); // cleaning costs
+          Animal[] animals = s.getAnimalList();
+          for (Animal a : animals) {
+            a.setAge(4);
+            loss += Rand.getRandomNumberInRange(200, 200 * 2); // food costs
+            profit += a.getAppeal() + a.calcAppealMultipler(); // generates profit based on appeal
+            profit += 1000 / a.getAge(); // generates profit based on age
+            /*
+            TODO:
+            - Implement births and deaths
+          */
+          }
+        }
+      }
+    }
+    /*
+      TODO:
+      - Handle negative balance; possibly: in case of debt, animals will be sold if needed
+    */
   }
 
   // Trying to know what object class is being called so it can be instacenced to
   // make a new animal of that speficif genus (PROBABLY DUMPED DOING SOMETHING
   // MORE SIMPLE)
   public static Object createObject(String className)
-      throws IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
+    throws IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
     Object object = null;
     try {
       Class c = Class.forName(className);
