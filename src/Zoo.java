@@ -106,7 +106,7 @@ public class Zoo {
           accountingPeriod(); //Accounting Period advances 4 months
           break;
         case "9":
-          // jumanji();
+          jumanji();
           break;
         default:
           Console.clear();
@@ -1506,6 +1506,53 @@ public class Zoo {
       }
     }
     System.out.println("Current balance: " + getBalance() + ".");
+    System.out.println("\nEnter any key to return to main menu:");
+    String any = in.nextLine();
+  }
+
+  private void jumanji() {
+    if (!this.settlementList.isEmpty()) {
+      Settlement s;
+      for (int i = 0; i < this.settlementList.size(); i++) {
+        s = settlementList.get(i);
+        if (s.getAnimalCount() > 0) {
+          ArrayList<Animal> animals = s.getAnimals();
+          Animal[] newSettlementList = s.getAnimalList();
+          for (int j = 0; i < animals.size(); i++) {
+            int rand = Rand.getRandomNumberInRange(0, 100);
+            // 20% chance an animal escapes a settlement, 10% chance an animal escapes the zoo
+            if (rand < 20) {
+              for (int p = 0; p < newSettlementList.length; p++) {
+                if (newSettlementList[p] == animals.get(j)) {
+                  System.out.println(
+                    animals.get(j).getName() + " has escaped his settlement!"
+                  );
+                  addAnimal(animals.get(j)); // places animal in inventory
+                  newSettlementList[p] = null; // remove animal from settlement
+                  s.setAnimalList(newSettlementList); // Updates settlement animal list
+                  settlementList.set(i, s); // Updates settlement
+                  break;
+                }
+              }
+            } else if (rand >= 20 && rand < 30) {
+              for (int p = 0; p < newSettlementList.length; p++) {
+                if (newSettlementList[p] == animals.get(j)) {
+                  System.out.println(
+                    animals.get(j).getName() + " has escaped the zoo!"
+                  );
+                  newSettlementList[p] = null; // remove animal from settlement
+                  s.setAnimalList(newSettlementList); // Updates settlement animal list
+                  settlementList.set(i, s); // Updates settlement
+                  break;
+                }
+              }
+            }
+          }
+        }
+      }
+    } else {
+      System.out.println("\nThere are no settlements built.");
+    }
     System.out.println("\nEnter any key to return to main menu:");
     String any = in.nextLine();
   }
