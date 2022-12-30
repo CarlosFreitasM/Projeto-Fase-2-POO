@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public abstract class Canidae extends Animal{
-    public String animalFamily, espName;
+    private String animalFamily, espName;
 
     private final String[] animalName = {
         "Wolf",
@@ -27,7 +27,7 @@ public abstract class Canidae extends Animal{
         return animalFamily;
 
     }
-
+    // Animals of the Canidae have a 1.7 times boost to their appeal
     public double calcAppealBuying(){
         return baseAppeal*1.7;
     }

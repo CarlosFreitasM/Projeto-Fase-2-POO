@@ -36,7 +36,7 @@ public class Zoo {
   }
 
   // METHODS+
-
+  //Funtion to read the file with the name of the animals available
   private void fileCheck() throws IOException {
     FileReader reader = new FileReader("animals.txt");
     BufferedReader fR = new BufferedReader(reader);
@@ -78,32 +78,32 @@ public class Zoo {
       choice = in.nextLine();
       switch (choice) {
         case "0":
-          endGame();
+          endGame(); // Exit application
           break;
         case "1":
           Console.clear();
-          acquireAnimalMenu();
+          acquireAnimalMenu(); //Acquire 1 of 3 random available options of animals
           break;
         case "2":
-          buildSettlement();
+          buildSettlement(); //Funtion for settlement building
           break;
         case "3":
-          placeAnimalInSettlement();
+          placeAnimalInSettlement(); //Place animals in their settlement that the user chooses
           break;
         case "4":
           // boostAnimal();
           break;
         case "5":
-          showAnimalsMenu();
+          showAnimalsMenu(); //Menu where the user can view the animals by: ALL, ID, GENETICS and MUTATIONS
           break;
         case "6":
-          showSettlements();
+          showSettlements(); //Menu that shows the user all the settlements
           break;
         case "7":
           // displayInformationMenu();
           break;
         case "8":
-          // accountingPeriod();
+          accountingPeriod(); //Accounting Period advances 4 months
           break;
         case "9":
           // jumanji();
@@ -135,12 +135,12 @@ public class Zoo {
         return;
       case "1":
         Console.clear();
-        getRandomAnimal();
+        getRandomAnimal(); //Choosing option 1 will give the user 3 options to choose what random animal the user wants and can also leave this menu
         break;
       case "2":
         System.out.println("GENETIC FEATURE");
         try {
-          showGenetic();
+          showGenetic(); //Choosing this option will reveal to the user another menu with all the genetics options-
         } catch (ClassNotFoundException e) {
           // TODO Auto-generated catch block
           e.printStackTrace();
@@ -168,7 +168,7 @@ public class Zoo {
         System.out.println("Please enter a valid option for acquire animal.");
     }
   }
-
+  // The user will be presented with 3 random animals he can choose, showing the name, species name, age and mutations of said animal
   private void getRandomAnimal() {
     Animal animal1 = instanceRandomAnimal();
     Animal animal2 = instanceRandomAnimal();
@@ -267,7 +267,7 @@ public class Zoo {
         );
     }
   }
-
+  //The user can choose of which genetics he wants his animal 
   private void getSpecifAnimal(ArrayList<Animal> an) {
     Animal animal1 = an.get(0);
     Animal animal2 = an.get(1);
@@ -366,7 +366,7 @@ public class Zoo {
         );
     }
   }
-
+  // The user is able to build/buy a settlement in exchange of some money
   private void buildSettlement() {
     Settlement proposal1 = new Settlement();
     Settlement proposal2 = new Settlement();
@@ -422,7 +422,7 @@ public class Zoo {
         System.out.println("Please enter a valid option.");
     }
   }
-
+  // First will appear all the available animals that haven't been placed in a settlement and then it'll show all settlements 
   private void placeAnimalInSettlement() {
     Console.clear();
 
@@ -599,7 +599,7 @@ public class Zoo {
         } else System.out.println("Please enter a valid option.");
     }
   }
-
+  //Buying a settlement will cost money, so it'll be deducted from the zoo's balance. 
   private boolean buy(int price) {
     if (getBalance() > price) {
       addBalance(-price);
@@ -609,7 +609,7 @@ public class Zoo {
     System.out.println("You don't have enough money.");
     return false;
   }
-
+  // A menu where it shows 4 diferent options: ALL, GENETIC, MUTATIONS and BY ID
   private void showAnimalsMenu() {
     Console.clear();
     System.out.println(
@@ -660,7 +660,7 @@ public class Zoo {
         System.out.println("Please enter a valid option to verify .");
     }
   }
-
+  //The system will show to the user all settlements
   private void showSettlements() {
     Console.clear();
     if (settlementList.isEmpty()) {
@@ -728,7 +728,7 @@ public class Zoo {
     String any = in.nextLine();
     Console.clear();
   }
-
+  // The system will show all genetic options available
   private void showByGenetics() throws ClassNotFoundException {
     System.out.println(
       "-------CHOOSE-ANIMAL-GENETIC------\n" +
@@ -923,7 +923,7 @@ public class Zoo {
     String any = in.nextLine();
     Console.clear();
   }
-
+  //Will show to the user all mutations available
   private void showByMutations() {
     System.out.println(
       "--------CHOOSE-ANIMAL-MUTATIONS-------\n" +
@@ -1040,7 +1040,7 @@ public class Zoo {
     String any = in.nextLine();
     Console.clear();
   }
-
+  // Shows all the animals by their id
   private String showAnimalById(int id) {
     try {
       return inventory.get(id).getName();
@@ -1049,7 +1049,7 @@ public class Zoo {
       return "";
     }
   }
-
+  // The system will show all genetic options available diferent from showByGenetics. This one is used to only show the animals with that genetics and the animal is already bought
   private void showGenetic()
     throws ClassNotFoundException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
     System.out.println(
@@ -1304,11 +1304,11 @@ public class Zoo {
         System.out.println("Please enter a valid Genetic option.");
     }
   }
-
+  // Funtion that adds an animal and inserts it into the inventory
   private void addAnimal(Animal a) {
     inventory.put(a.getId(), a);
   }
-
+  // Making an instance of a random animal so that it can be shown to the user
   private Animal instanceRandomAnimal() {
     int i = new Random().nextInt(10);
     switch (i) {
@@ -1345,7 +1345,7 @@ public class Zoo {
     }
     return chooseAni;
   }
-
+  // Gives the appeal of an animal based on it's age, animal family, species and mutations
   private Double getAppealOfAnimal(Animal a) {
     switch (a.getClass().getSimpleName()) {
       case "Lion":
@@ -1381,7 +1381,7 @@ public class Zoo {
     }
     return Math.floor(totalAppeal * 100) / 100;
   }
-
+  // Showing an animal in the acquire animal menu, will create the animal with the caracteristics shown when the animal was being presented in the menu 
   private Animal createNewAnimal(
     String animalType,
     String artName,
@@ -1455,10 +1455,16 @@ public class Zoo {
           loss += Rand.getRandomNumberInRange(100, 100 * 2); // cleaning costs
           Animal[] animals = s.getAnimalList();
           for (Animal a : animals) {
-            a.setAge(4);
-            loss += Rand.getRandomNumberInRange(200, 200 * 2); // food costs
-            profit += (int) a.getAppeal() + a.calcAppealMultipler(); // generates profit based on appeal
-            profit += 1000 / a.getAge(); // generates profit based on age
+            try{
+              a.setAge(4);
+              loss += Rand.getRandomNumberInRange(200, 200 * 2); // food costs
+              profit += getAppealOfAnimal(a); // generates profit based on appeal which are based on the animal family, species, mutations and age
+            }
+            catch (NullPointerException e)
+            {
+              //Não existem mais animais no settlement
+            }
+            
             /*
             TODO:
             - Implement births and deaths
@@ -1475,7 +1481,7 @@ public class Zoo {
   }
 
   // Trying to know what object class is being called so it can be instacenced to
-  // make a new animal of that speficif genus (PROBABLY DUMPED DOING SOMETHING
+  // make a new animal of that speficif genus (PROBABLY DUMPED, DOING SOMETHING
   // MORE SIMPLE)
   public static Object createObject(String className)
     throws IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {

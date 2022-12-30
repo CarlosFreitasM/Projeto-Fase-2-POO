@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public abstract class Amphibia extends Animal{
-    public String animalFamily, espName;
+    private String animalFamily, espName;
 
     private final String[] animalName = {
         "Fire Salamandre",
@@ -26,7 +26,7 @@ public abstract class Amphibia extends Animal{
         return animalFamily;
 
     }
-
+    // Animals of the Canidae have a 1.2 times boost to their appeal
     public double calcAppealBuying(){
         return baseAppeal*1.2;
     }

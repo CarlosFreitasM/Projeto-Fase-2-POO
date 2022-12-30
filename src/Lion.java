@@ -2,8 +2,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Lion extends Felidae implements Pantherae{
-    public String gender;
-    public String espName;
+    private String gender;
+    private String espName;
 
     public Lion(){
         super.setAdultAge(24);
@@ -13,6 +13,7 @@ public class Lion extends Felidae implements Pantherae{
 
     public Lion(String name, Integer age, Double appeal, ArrayList<String> mutationList, Integer ageOfDeath){
         super(name, age, appeal, mutationList, ageOfDeath);
+        super.setAdultAge(24);
         this.id = super.getId();
         this.espName="Lion";
         this.gender=getGender();
@@ -26,7 +27,9 @@ public class Lion extends Felidae implements Pantherae{
             return "Female";
     }
 
-
+    //Lion's appeal is boosted further by 1.5 time, but every animal has a 0%-30% deduction to their profits based on age of the animal until they turn into an adult
+    //New born have a 0% penalty (Age:0)
+    //Adults have a 30% penalty
     public double calcAppealBuying(){
 
         return ((super.calcAppealBuying()*1.5)+super.calcAppealMultipler())*super.getAgeDeduction();

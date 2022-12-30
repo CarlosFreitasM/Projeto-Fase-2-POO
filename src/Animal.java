@@ -14,7 +14,8 @@ public class Animal implements Mutation {
 
   private static final AtomicInteger count = new AtomicInteger(-1);
   private static final AtomicInteger newMethod = new AtomicInteger(-1);
-  public int id, age, multipler, adultAge, addAppeal, ageOfDeath, lifeExpectancy;
+  protected int id, adultAge, age;
+  private int multipler, addAppeal, ageOfDeath, lifeExpectancy;
   public final Double baseAppeal = 100.0;
   public Double appeal;
   private String name;
@@ -124,6 +125,7 @@ public class Animal implements Mutation {
     return chanc;
   }
 
+  //Add to the appeal of the animal's list of mutations
   public int calcAppealMultipler() {
     this.addAppeal = 0;
     for (int j = 0; j < mutationList.size(); j++) {
@@ -150,7 +152,6 @@ public class Animal implements Mutation {
     double lifeExpecFormula;
     while(true){
       try{
-        System.out.println(lifeExpectancyA + "::" + ageUntilDeath);
         lifeExpecFormula = ((((lifeExpectancyA+ (double) ageUntilDeath)/lifeExpectancyA)/2));
       }
       catch (ArithmeticException a)
@@ -188,10 +189,11 @@ public class Animal implements Mutation {
   }
 
   public double getAgeDeduction() {
-    if ((1 - ((age / adultAge) * 0.3)) <= 0.7) {
+    System.out.println(age + "::" + adultAge);
+    if ((1 - ((double) (age / adultAge) * 0.3)) <= 0.7) {
       return 0.7;
     } else {
-      return 1 - (age * 0.3 / adultAge);
+      return 1 - (double) (age * 0.3 / adultAge);
     }
   }
 

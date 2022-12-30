@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public abstract class Felidae extends Animal{
-    public String animalFamily, espName;
+    private String animalFamily, espName;
 
     private final String[] animalName = {
         "Lion",
@@ -29,7 +29,7 @@ public abstract class Felidae extends Animal{
         return animalFamily;
 
     }
-
+    // Animals of the Canidae have a 2 times boost to their appeal
     public double calcAppealBuying(){
         return baseAppeal*2;
     }
