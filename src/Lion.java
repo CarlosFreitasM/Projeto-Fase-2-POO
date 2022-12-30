@@ -7,10 +7,12 @@ public class Lion extends Felidae implements Pantherae{
 
     public Lion(){
         super.setAdultAge(24);
+        super.setLifeExpectancy(168);
+        super.setAnimalsDeathAge(calcAnimalsDeath(age, getLifeExpectancy()));
     }
 
-    public Lion(String name, Integer age, Double appeal, ArrayList<String> mutationList){
-        super(name, age, appeal, mutationList);
+    public Lion(String name, Integer age, Double appeal, ArrayList<String> mutationList, Integer ageOfDeath){
+        super(name, age, appeal, mutationList, ageOfDeath);
         this.id = super.getId();
         this.espName="Lion";
         this.gender=getGender();

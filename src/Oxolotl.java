@@ -5,10 +5,12 @@ public class Oxolotl extends Amphibia implements Ambystoma{
 
     public Oxolotl(){
         super.setAdultAge(12);
+        super.setLifeExpectancy(156);
+        super.setAnimalsDeathAge(calcAnimalsDeath(age, getLifeExpectancy()));
     }
 
-    public Oxolotl(String name, Integer age, Double appeal, ArrayList<String> mutationList){
-        super(name, age, appeal, mutationList);
+    public Oxolotl(String name, Integer age, Double appeal, ArrayList<String> mutationList, Integer ageOfDeath){
+        super(name, age, appeal, mutationList, ageOfDeath);
         this.id = super.getId();
         this.espName="Oxolotl";
     }

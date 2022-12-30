@@ -12,8 +12,8 @@ public abstract class Amphibia extends Animal{
         
     }
 
-    public Amphibia(String name, Integer age, Double appeal, ArrayList<String> mutationList){
-        super(name, age, appeal, mutationList);
+    public Amphibia(String name, Integer age, Double appeal, ArrayList<String> mutationList, Integer ageOfDeath){
+        super(name, age, appeal, mutationList, ageOfDeath);
         this.id = super.getId();
         this.animalFamily= "Amphibia";
     }

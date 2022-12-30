@@ -14,7 +14,7 @@ public class Animal implements Mutation {
 
   private static final AtomicInteger count = new AtomicInteger(-1);
   private static final AtomicInteger newMethod = new AtomicInteger(-1);
-  public int id, age, multipler, adultAge, addAppeal;
+  public int id, age, multipler, adultAge, addAppeal, ageOfDeath, lifeExpectancy;
   public final Double baseAppeal = 100.0;
   public Double appeal;
   private String name;
@@ -45,6 +45,7 @@ public class Animal implements Mutation {
     this.addAppeal = 0;
     this.adultAge = 10;
     this.appeal = 100.0;
+    this.lifeExpectancy = 50;
     multipler = 1;
     isAlbino = calcAlbinism(multipler);
     if (isAlbino == true) {
@@ -87,13 +88,15 @@ public class Animal implements Mutation {
     String name,
     Integer age,
     Double appeal,
-    ArrayList<String> mutationList
+    ArrayList<String> mutationList,
+    Integer ageOfDeath
   ) {
     this.id = newMethod.incrementAndGet();
     this.name = name;
     this.age = age;
     this.appeal = appeal;
     this.mutationList = mutationList;
+    this.ageOfDeath=ageOfDeath;
   }
 
   public void sleep() {
@@ -141,6 +144,26 @@ public class Animal implements Mutation {
     }
     return addAppeal;
   }
+  //Returns at what age the animal will die
+  public int calcAnimalsDeath(int currentAge, int lifeExpectancyA){
+    int ageUntilDeath = currentAge;
+    double lifeExpecFormula;
+    while(true){
+      try{
+        System.out.println(lifeExpectancyA + "::" + ageUntilDeath);
+        lifeExpecFormula = ((((lifeExpectancyA+ (double) ageUntilDeath)/lifeExpectancyA)/2));
+      }
+      catch (ArithmeticException a)
+      {
+        lifeExpecFormula = 0;
+      }
+      double probRandMorrer = new Random().nextDouble(100);  
+      if(probRandMorrer<lifeExpecFormula){
+        return ageUntilDeath;
+      }
+      ageUntilDeath++;
+    }
+  }
 
   // GETTERS
 
@@ -172,10 +195,26 @@ public class Animal implements Mutation {
     }
   }
 
+  public int getAnimalsDeath(){
+    return this.ageOfDeath;
+  }
+
+  public int getLifeExpectancy(){
+    return this.lifeExpectancy;
+  }
+
   // SETTERS
 
   public void setAdultAge(int adultAge) {
     this.adultAge = adultAge;
+  }
+  
+  public void setLifeExpectancy(int lifeExpectancy){
+    this.lifeExpectancy=lifeExpectancy;
+  }
+
+  public void setAnimalsDeathAge(int ageOfDeath){
+    this.ageOfDeath = ageOfDeath;
   }
 
   public void setAge(int amount) {

@@ -5,10 +5,12 @@ public class Cheetah extends Felidae implements Acynonyx{
 
     public Cheetah(){
         super.setAdultAge(22);
+        super.setLifeExpectancy(108);
+        super.setAnimalsDeathAge(calcAnimalsDeath(age, getLifeExpectancy()));
     }
 
-    public Cheetah(String name, Integer age, Double appeal, ArrayList<String> mutationList){
-        super(name, age, appeal, mutationList);
+    public Cheetah(String name, Integer age, Double appeal, ArrayList<String> mutationList, Integer ageOfDeath){
+        super(name, age, appeal, mutationList, ageOfDeath);
         this.id = super.getId();
         this.espName="Cheetah";
     }

@@ -5,10 +5,12 @@ public class Leopard extends Felidae implements Pantherae{
 
     public Leopard(){
         super.setAdultAge(21);
+        super.setLifeExpectancy(132);
+        super.setAnimalsDeathAge(calcAnimalsDeath(age, getLifeExpectancy()));
     }
 
-    public Leopard(String name, Integer age, Double appeal, ArrayList<String> mutationList){
-        super(name, age, appeal, mutationList);
+    public Leopard(String name, Integer age, Double appeal, ArrayList<String> mutationList, Integer ageOfDeath){
+        super(name, age, appeal, mutationList, ageOfDeath);
 
         this.mutationList=super.getMutations();
         this.espName="Leopard";

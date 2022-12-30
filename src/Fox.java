@@ -5,10 +5,12 @@ public class Fox extends Canidae implements Vulpes{
 
     public Fox(){
         super.setAdultAge(10);
+        super.setLifeExpectancy(48);
+        super.setAnimalsDeathAge(calcAnimalsDeath(age, getLifeExpectancy()));
     }
 
-    public Fox(String name, Integer age, Double appeal, ArrayList<String> mutationList){
-        super(name, age, appeal, mutationList);
+    public Fox(String name, Integer age, Double appeal, ArrayList<String> mutationList, Integer ageOfDeath){
+        super(name, age, appeal, mutationList, ageOfDeath);
         this.id = super.getId();
         this.espName="Fox";
     }

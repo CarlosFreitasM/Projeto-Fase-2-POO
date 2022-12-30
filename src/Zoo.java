@@ -52,7 +52,7 @@ public class Zoo {
 
   public void mainMenu() throws IOException {
     // Console.clear();
-    // fileCheck();
+    fileCheck();
     while (this.running) {
       System.out.println(
         "------------MAIN-MENU------------\n" +
@@ -231,7 +231,8 @@ public class Zoo {
           animal1.getName(),
           animal1.getAge(),
           getAppealOfAnimal(animal1),
-          animal1.getMutations()
+          animal1.getMutations(),
+          animal1.getAnimalsDeath()
         );
         addAnimal(ani1);
         System.out.println(choice);
@@ -242,7 +243,8 @@ public class Zoo {
           animal2.getName(),
           animal2.getAge(),
           getAppealOfAnimal(animal2),
-          animal2.getMutations()
+          animal2.getMutations(),
+          animal2.getAnimalsDeath()
         );
         addAnimal(ani2);
         System.out.println("GENETIC FEATURE");
@@ -253,7 +255,8 @@ public class Zoo {
           animal3.getName(),
           animal3.getAge(),
           getAppealOfAnimal(animal3),
-          animal3.getMutations()
+          animal3.getMutations(),
+          animal3.getAnimalsDeath()
         );
         addAnimal(ani3);
         System.out.println("GENETIC CHAR");
@@ -327,7 +330,8 @@ public class Zoo {
           animal1.getName(),
           animal1.getAge(),
           getAppealOfAnimal(animal1),
-          animal1.getMutations()
+          animal1.getMutations(),
+          animal1.getAnimalsDeath()
         );
         addAnimal(ani1);
         System.out.println(choice);
@@ -338,7 +342,8 @@ public class Zoo {
           animal2.getName(),
           animal2.getAge(),
           getAppealOfAnimal(animal2),
-          animal2.getMutations()
+          animal2.getMutations(),
+          animal2.getAnimalsDeath()
         );
         addAnimal(ani2);
         System.out.println("GENETIC FEATURE");
@@ -349,7 +354,8 @@ public class Zoo {
           animal3.getName(),
           animal3.getAge(),
           getAppealOfAnimal(animal3),
-          animal3.getMutations()
+          animal3.getMutations(),
+          animal3.getAnimalsDeath()
         );
         addAnimal(ani3);
         System.out.println("GENETIC CHAR");
@@ -709,7 +715,9 @@ public class Zoo {
         ") " +
         entry.getValue().getName() +
         ", " +
-        entry.getValue().getAppeal()
+        entry.getValue().getAppeal() +
+        ", Age of death: " +
+        entry.getValue().getAnimalsDeath()
       );
     }
     System.out.println(
@@ -951,6 +959,7 @@ public class Zoo {
               entry.getValue().getAppeal() +
               ", " +
               entry.getValue().getMutations()
+              
             );
           }
         }
@@ -1296,8 +1305,6 @@ public class Zoo {
     }
   }
 
-  private void findClassesWithInterface() {}
-
   private void addAnimal(Animal a) {
     inventory.put(a.getId(), a);
   }
@@ -1380,38 +1387,39 @@ public class Zoo {
     String artName,
     int age,
     Double appeal,
-    ArrayList<String> mutations
+    ArrayList<String> mutations,
+    Integer ageOfDeath
   ) {
     switch (animalType) {
       case "Lion":
-        chooseAni = new Lion(artName, age, appeal, mutations);
+        chooseAni = new Lion(artName, age, appeal, mutations, ageOfDeath);
         break;
       case "Tiger":
-        chooseAni = new Tiger(artName, age, appeal, mutations);
+        chooseAni = new Tiger(artName, age, appeal, mutations, ageOfDeath);
         break;
       case "Leopard":
-        chooseAni = new Leopard(artName, age, appeal, mutations);
+        chooseAni = new Leopard(artName, age, appeal, mutations, ageOfDeath);
         break;
       case "Cheetah":
-        chooseAni = new Cheetah(artName, age, appeal, mutations);
+        chooseAni = new Cheetah(artName, age, appeal, mutations, ageOfDeath);
         break;
       case "Cougar":
-        chooseAni = new Cougar(artName, age, appeal, mutations);
+        chooseAni = new Cougar(artName, age, appeal, mutations, ageOfDeath);
         break;
       case "Wolf":
-        chooseAni = new Wolf(artName, age, appeal, mutations);
+        chooseAni = new Wolf(artName, age, appeal, mutations, ageOfDeath);
         break;
       case "Coyote":
-        chooseAni = new Coyote(artName, age, appeal, mutations);
+        chooseAni = new Coyote(artName, age, appeal, mutations, ageOfDeath);
         break;
       case "Fox":
-        chooseAni = new Fox(artName, age, appeal, mutations);
+        chooseAni = new Fox(artName, age, appeal, mutations, ageOfDeath);
         break;
       case "Firesalamandre":
-        chooseAni = new Firesalamandre(artName, age, appeal, mutations);
+        chooseAni = new Firesalamandre(artName, age, appeal, mutations, ageOfDeath);
         break;
       case "Oxolotl":
-        chooseAni = new Oxolotl(artName, age, appeal, mutations);
+        chooseAni = new Oxolotl(artName, age, appeal, mutations, ageOfDeath);
         break;
     }
     return chooseAni;

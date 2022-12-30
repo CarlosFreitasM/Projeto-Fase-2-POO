@@ -5,10 +5,12 @@ public class Firesalamandre extends Amphibia implements Salamandre{
 
     public Firesalamandre(){
         super.setAdultAge(3);
+        super.setLifeExpectancy(240);
+        super.setAnimalsDeathAge(calcAnimalsDeath(age, getLifeExpectancy()));
     }
 
-    public Firesalamandre(String name, Integer age, Double appeal, ArrayList<String> mutationList){
-        super(name, age, appeal, mutationList);
+    public Firesalamandre(String name, Integer age, Double appeal, ArrayList<String> mutationList, Integer ageOfDeath){
+        super(name, age, appeal, mutationList, ageOfDeath);
         this.id = super.getId();
         this.espName="Firesalamandre";
     }

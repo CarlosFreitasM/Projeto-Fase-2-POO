@@ -5,10 +5,12 @@ public class Tiger extends Felidae implements Pantherae{
 
     public Tiger(){
         super.setAdultAge(48);
+        super.setLifeExpectancy(108);
+        super.setAnimalsDeathAge(calcAnimalsDeath(age, getLifeExpectancy()));
     }
 
-    public Tiger(String name, Integer age, Double appeal, ArrayList<String> mutationList){
-        super(name, age, appeal, mutationList);
+    public Tiger(String name, Integer age, Double appeal, ArrayList<String> mutationList, Integer ageOfDeath){
+        super(name, age, appeal, mutationList, ageOfDeath);
         this.id = super.getId();
         this.espName="Tiger";
     }

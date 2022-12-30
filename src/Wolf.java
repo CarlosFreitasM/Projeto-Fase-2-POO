@@ -5,10 +5,12 @@ public class Wolf extends Canidae implements Canis{
 
     public Wolf(){
         super.setAdultAge(30);
+        super.setLifeExpectancy(138);
+        super.setAnimalsDeathAge(calcAnimalsDeath(age, getLifeExpectancy()));
     }
 
-    public Wolf(String name, Integer age, Double appeal, ArrayList<String> mutationList){
-        super(name, age, appeal, mutationList);
+    public Wolf(String name, Integer age, Double appeal, ArrayList<String> mutationList, Integer ageOfDeath){
+        super(name, age, appeal, mutationList, ageOfDeath);
         this.id = super.getId();
         this.espName="Wolf";
     }
