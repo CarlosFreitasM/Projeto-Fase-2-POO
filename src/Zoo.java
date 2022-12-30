@@ -1421,7 +1421,7 @@ public class Zoo {
 
   private void accountingPeriod() {
     // Each accounting period is equal to 4 months in time
-    double loss = 0;
+    int profit = 0, loss = 0;
 
     if (!inventory.isEmpty()) {
       Animal a;
@@ -1440,7 +1440,6 @@ public class Zoo {
 
     if (!this.settlementList.isEmpty()) {
       Settlement s;
-      double profit = 0;
       for (int i = 0; i < this.settlementList.size(); i++) {
         s = settlementList.get(i);
         if (s.getAnimalCount() > 0) {
@@ -1450,7 +1449,7 @@ public class Zoo {
           for (Animal a : animals) {
             a.setAge(4);
             loss += Rand.getRandomNumberInRange(200, 200 * 2); // food costs
-            profit += a.getAppeal() + a.calcAppealMultipler(); // generates profit based on appeal
+            profit += (int) a.getAppeal() + a.calcAppealMultipler(); // generates profit based on appeal
             profit += 1000 / a.getAge(); // generates profit based on age
             /*
             TODO:
@@ -1460,6 +1459,7 @@ public class Zoo {
         }
       }
     }
+    this.addBalance(profit - loss);
     /*
       TODO:
       - Handle negative balance; possibly: in case of debt, animals will be sold if needed
